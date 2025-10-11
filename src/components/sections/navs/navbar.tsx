@@ -64,7 +64,7 @@ export default function Navbar() {
     });
 
   return (
-    <header className="w-full border-gray-200 bg-white lg:hidden">
+    <header className="w-full border-gray-200 bg-white xl:hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="flex items-center justify-between h-16">
