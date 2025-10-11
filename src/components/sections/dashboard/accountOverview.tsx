@@ -54,7 +54,7 @@ const accountOverview = () => {
                     </DropdownMenuTrigger>
                   </div>
                   <DropdownMenuContent>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem >
                       <div onClick={(e) => e.stopPropagation()} className="p-2">
                         <Withdraw />
                       </div>

@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import BankTransfer from "./bankTransfer";
 import BitcoinTransfer from "./bitcoinTransfer";
@@ -9,8 +8,8 @@ import { BsCurrencyBitcoin } from "react-icons/bs";
 export function Withdraw() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Withdra</Button>
+      <DialogTrigger asChild className="w-fit p-0 border-0 shadow-0">
+        <span className="cursor-pointer">Withdraw</span>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-4xl p-0 overflow-y-auto max-h-[100vh]">
