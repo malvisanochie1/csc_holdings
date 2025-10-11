@@ -69,18 +69,20 @@ export default function Navbar() {
         <div>
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="CSC logo"
-                width={100}
-                height={100}
-                className="w-10 md:w-20 h-10 md:h-20 object-contain"
-              />
-              <div className="hidden sm:block text-sm font-semibold">
-                CSC ESCROW &amp; SETTLEMENT UK LTD
+            <Link href="/">
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/logo.png"
+                  alt="CSC logo"
+                  width={100}
+                  height={100}
+                  className="w-10 md:w-20 h-10 md:h-20 object-contain"
+                />
+                <div className="hidden sm:block text-sm font-semibold">
+                  CSC ESCROW &amp; SETTLEMENT UK LTD
+                </div>
               </div>
-            </div>
+            </Link>
 
             {/* Hamburger */}
             <button

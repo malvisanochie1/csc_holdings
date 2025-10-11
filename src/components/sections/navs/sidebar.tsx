@@ -28,23 +28,26 @@ export default function Sidebar({ active }: SidebarProps) {
     <aside className="w-full h-full overflow-y-auto min-h-screen border-r border-gray-200 pt-4 flex flex-col pb-2">
       {/* Upper content */}
       <div className="flex-1">
-        <div className="flex flex-col gap-3 mb-4 ps-6">
-          <Image
-            src="/logo.png"
-            alt="CSC logo"
-            width={60}
-            height={60}
-            className="w-[50px] object-contain"
-          />
-          <div>
+        <Link href="/">
+          <div className="flex flex-col gap-3 mb-4 ps-6">
+            <Image
+              src="/logo.png"
+              alt="CSC logo"
+              width={60}
+              height={60}
+              className="w-[50px] object-contain"
+            />
             <div>
-              <h1 className="text-sm font-bold flex items-center flex-nowrap">
-                CSC ESCROW & SETTLEMENT
-              </h1>
+              <div>
+                <h1 className="text-sm font-bold flex items-center flex-nowrap">
+                  CSC ESCROW & SETTLEMENT
+                </h1>
+              </div>
+              <div className="text-sm font-bold">UK LIMITED</div>
             </div>
-            <div className="text-sm font-bold">UK LIMITED</div>
           </div>
-        </div>
+        </Link>
+
         <hr className="h-[1px] w-40 mx-auto border-0 bg-gradient-to-r from-[#00000000] via-[#21212166] to-[#00000000]" />
 
         <nav aria-label="Main navigation" className="space-y-1 px-6 pt-4">
