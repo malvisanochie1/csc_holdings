@@ -48,13 +48,13 @@ const accountOverview = () => {
             <div className="py-5 pb-10 shadow-xl card">
               <div className="min-h-16 w-full">
                 <DropdownMenu>
-                  <div className="w-full flex justify-end  focus:rind-0 focus:border-0 focus:outline-none">
+                  <div className="w-full flex justify-end  focus:rind-0 focus:border-0 focus:outline-none pe-2 md:pe-4 text-gray-600">
                     <DropdownMenuTrigger className=" focus:rind-0 focus:border-0 focus:outline-none cursor-pointer">
                       <MdMoreVert />
                     </DropdownMenuTrigger>
                   </div>
                   <DropdownMenuContent>
-                    <DropdownMenuItem >
+                    <DropdownMenuItem>
                       <div onClick={(e) => e.stopPropagation()} className="p-2">
                         <Withdraw />
                       </div>
