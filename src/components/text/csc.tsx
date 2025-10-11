@@ -1,4 +1,19 @@
 import { BsFillLightbulbFill } from "react-icons/bs";
+import { BsBank2 } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { FaCommentsDollar } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
+import { TbLogout2 } from "react-icons/tb";
+
+type NavKey =
+  | "dashboard"
+  | "profile"
+  | "transactions"
+  | "notifications"
+  | "logout";
+
+
+
 
 interface AccountOverviewItem {
   img: string;
@@ -167,5 +182,39 @@ export const steps = [
     desc: "Confirmation Of Reception Of Funds To Company Account",
     bg: "bg-[#73CD2C]",
     icon: <BsFillLightbulbFill size={14} className="text-white" />,
+  },
+];
+
+
+export const navItems = [
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <BsBank2 size={20} />,
+  },
+  {
+    key: "profile",
+    label: "Profile",
+    href: "/profile",
+    icon: <FaUser size={20} />,
+  },
+  {
+    key: "transactions",
+    label: "Transactions",
+    href: "/dashboard/transactions",
+    icon: <FaCommentsDollar />,
+  },
+  {
+    key: "notifications",
+    label: "Notifications",
+    href: "/notification",
+    icon: <FaBell />,
+  },
+  {
+    key: "logout",
+    label: "Logout",
+    href: "/logout",
+    icon: <TbLogout2 size={20} />,
   },
 ];

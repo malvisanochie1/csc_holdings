@@ -27,11 +27,11 @@ export default function RootLayout({
       <body
         className={`home-bg ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="grid lg:grid-cols-12  home-bg h-screen">
-          <div className="col-span-3">
+        <div className="flex  home-bg h-screen">
+          <div className="max-w-[240px] w-full">
             <Sidebar />
           </div>
-          <div className="col-span-9">{children}</div>
+          <div className="w-full">{children}</div>
         </div>
       </body>
     </html>

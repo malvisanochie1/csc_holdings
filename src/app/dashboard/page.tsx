@@ -5,12 +5,11 @@ import RecoveryandTransactionStatus from "@/components/sections/dashboard/recove
 
 const page = () => {
   return (
-
-        <div className="flex-1 p-3 sm:p-5 h-full overflow-y-auto">
-          <AccountOverview />
-          <FinancialAssets />
-          <RecoveryandTransactionStatus />
-        </div>
+    <div className="flex-1 p-3 sm:p-5 h-full overflow-y-auto">
+      <AccountOverview />
+      <FinancialAssets />
+      <RecoveryandTransactionStatus />
+    </div>
   );
 };
 
