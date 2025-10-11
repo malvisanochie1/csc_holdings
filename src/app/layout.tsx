@@ -6,7 +6,7 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
+import Navbar from "@/components/sections/navs/navbar";
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -27,8 +27,9 @@ export default function RootLayout({
       <body
         className={`home-bg ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex  home-bg h-screen">
-          <div className="max-w-[240px] w-full">
+        <Navbar />
+        <div className="flex home-bg lg:h-screen">
+          <div className="max-w-[240px] w-full hidden lg:flex">
             <Sidebar />
           </div>
           <div className="w-full">{children}</div>

@@ -5,15 +5,12 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { TbLogout2 } from "react-icons/tb";
 
-type NavKey =
+export type NavKey =
   | "dashboard"
   | "profile"
   | "transactions"
   | "notifications"
   | "logout";
-
-
-
 
 interface AccountOverviewItem {
   img: string;
@@ -185,36 +182,35 @@ export const steps = [
   },
 ];
 
-
 export const navItems = [
   {
     key: "dashboard",
     label: "Dashboard",
     href: "/dashboard",
-    icon: <BsBank2 size={20} />,
+    icon: <BsBank2 size={15} />,
   },
   {
     key: "profile",
     label: "Profile",
     href: "/profile",
-    icon: <FaUser size={20} />,
+    icon: <FaUser size={15} />,
   },
   {
     key: "transactions",
     label: "Transactions",
     href: "/dashboard/transactions",
-    icon: <FaCommentsDollar />,
+    icon: <FaCommentsDollar size={15} />,
   },
   {
     key: "notifications",
     label: "Notifications",
     href: "/notification",
-    icon: <FaBell />,
+    icon: <FaBell size={15} />,
   },
   {
     key: "logout",
     label: "Logout",
     href: "/logout",
-    icon: <TbLogout2 size={20} />,
+    icon: <TbLogout2 size={15} />,
   },
 ];
