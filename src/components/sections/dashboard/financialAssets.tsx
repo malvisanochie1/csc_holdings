@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import {
@@ -8,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MdMoreVert } from "react-icons/md";
 import { account_overview } from "@/components/text/csc";
-
+import InsufficientBalance from "../withdraw/insufficientBalance";
 const financialAssets = () => {
   return (
     <>
@@ -16,7 +17,9 @@ const financialAssets = () => {
         {account_overview.map((item, idx) => (
           <div
             key={idx}
-            className={`card p-2 sm:p-4 px-4 md:px-auto ${item.className ?? ""}`}
+            className={`card p-2 sm:p-4 px-4 md:px-auto ${
+              item.className ?? ""
+            }`}
           >
             <div className="flex items-center justify-between">
               <Image
@@ -34,7 +37,18 @@ const financialAssets = () => {
                 </div>
                 <DropdownMenuContent>
                   <DropdownMenuItem>{item.option[0].option1}</DropdownMenuItem>
-                  <DropdownMenuItem>{item.option[0].option2}</DropdownMenuItem>
+                  <DropdownMenuItem
+                    onSelect={(e: Event) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                  >
+                    <InsufficientBalance />
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>{" "}
             </div>

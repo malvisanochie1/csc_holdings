@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import {
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MdMoreVert } from "react-icons/md";
 import { MdDiamond } from "react-icons/md";
+import { Withdraw } from "../withdraw/withdraw";
 const accountOverview = () => {
   return (
     <>
@@ -19,10 +21,7 @@ const accountOverview = () => {
               <h3 className="text-center text-gray-400 pb-1.5 sm:pb-2 md:pb-3">
                 Account ID
               </h3>
-              <p className="header text-center">
-                {" "}
-                ACMCT3IRDL1
-              </p>
+              <p className="header text-center"> ACMCT3IRDL1</p>
             </div>
             <div className="py-5 pb-10 shadow-xl shadow-gray-200 card">
               <div className="min-h-16">
@@ -43,9 +42,7 @@ const accountOverview = () => {
                   Current Re-Claimed Funds{" "}
                 </h3>
                 <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 border-0 h-[1px]" />
-                <p className="header text-center">
-                  $ 10,000
-                </p>
+                <p className="header text-center">$ 10,000</p>
               </div>
             </div>
             <div className="py-5 pb-10 shadow-xl card">
@@ -57,7 +54,11 @@ const accountOverview = () => {
                     </DropdownMenuTrigger>
                   </div>
                   <DropdownMenuContent>
-                    <DropdownMenuItem>Withdraw</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <div onClick={(e) => e.stopPropagation()} className="p-2">
+                        <Withdraw />
+                      </div>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>{" "}
                 <Image
@@ -76,10 +77,7 @@ const accountOverview = () => {
                   FIAT{" "}
                 </h3>
                 <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 border-0 h-[1px]" />
-                <p className="header text-center">
-                  {" "}
-                  $ 0
-                </p>
+                <p className="header text-center"> $ 0</p>
               </div>
             </div>
           </div>
