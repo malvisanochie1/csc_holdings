@@ -19,7 +19,7 @@ export default function Sidebar({ active }: SidebarProps) {
     if (pathname.startsWith("/dashboard")) return "dashboard";
     if (pathname.startsWith("/profile")) return "profile";
     if (pathname.startsWith("/notification")) return "notifications";
-    if (pathname.startsWith("/logout")) return "logout";
+    if (pathname.startsWith("/login")) return "logout";
     return "notifications";
   }, [pathname]);
 

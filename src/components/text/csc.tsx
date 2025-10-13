@@ -210,7 +210,7 @@ export const navItems = [
   {
     key: "logout",
     label: "Logout",
-    href: "/logout",
+    href: "/login",
     icon: <TbLogout2 size={15} />,
   },
 ];
