@@ -27,13 +27,7 @@ export default function RootLayout({
       <body
         className={`home-bg lato ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        <div className="flex home-bg lg:h-screen">
-          <div className="max-w-[240px] w-full hidden xl:flex">
-            <Sidebar />
-          </div>
           <div className="w-full">{children}</div>
-        </div>
       </body>
     </html>
   );

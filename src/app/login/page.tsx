@@ -8,33 +8,24 @@ const page = () => {
       <div className="max-w-md mx-auto card p-3 sm:p-5 py-10 sm:py-8  md:p-10 mt-20 ">
         <div className="w-full">
           <h1 className="text-xl sm:text-2xl font-bold">
-            REGISTER NOW
+            <span className="text-lg sm:text-lg lg:text-xl">Login to </span> CSC
+            ESCROW & <br /> SETTLEMENT UK LTD
           </h1>
           <p className="text-gray-500 font-light mt-2 mb-8 sm:mb-10 lg:mb-12">
             Reliable, Dependable.
           </p>
+
           <FieldSet>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name" className="font-semibold">
-                  Name
+                <FieldLabel htmlFor="email" className="font-semibold">
+                  Email
                 </FieldLabel>
                 <Input
                   className="focus-visible:ring-0 rounded bg-[#E8F0FE]"
                   type="email"
                   id="email"
                   placeholder="Your email address"
-                />
-              </Field>
-               <Field>
-                <FieldLabel htmlFor="lastName" className="font-semibold">
-                  Last Name
-                </FieldLabel>
-                <Input
-                  className="focus-visible:ring-0 rounded bg-[#E8F0FE]"
-                  type="type"
-                  id="lastName"
-                  placeholder="Last Name"
                 />
               </Field>
               <Field className="mt-4 sm:mt-6">
