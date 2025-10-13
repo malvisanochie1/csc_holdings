@@ -5,7 +5,7 @@ import Link from "next/link";
 const page = () => {
   return (
     <div className="p-3 max-h-screen overflow-y-auto content-scroll">
-      <div className="max-w-md mx-auto card p-3 sm:p-5 py-10 sm:py-8  md:p-10 ">
+      <div className="max-w-md mx-auto card p-3 sm:p-5 py-5 sm:py-8  md:p-10 ">
         <div className="w-full">
           <h1 className="text-xl sm:text-2xl font-bold">
             <span className="text-lg sm:text-lg lg:text-xl">Login to </span> CSC

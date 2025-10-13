@@ -214,3 +214,4 @@ export const navItems = [
     icon: <TbLogout2 size={15} />,
   },
 ];
+
