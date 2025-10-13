@@ -64,7 +64,7 @@ export default function Navbar() {
     });
 
   return (
-    <section>
+    <section className="w-full">
       <header className="w-full border-gray-200 bg-white hidden sm:flex xl:hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div>
@@ -119,7 +119,7 @@ export default function Navbar() {
       <div
         className="fixed inset-x-0 bottom-0 px-2 pt-3 pb-5 bg-white z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden"
         style={{
-          paddingBottom: "env(safe-area-inset-bottom)", 
+          paddingBottom: "env(safe-area-inset-bottom)",
         }}
       >
         <ul className="flex items-baseline justify-between pb-2">
