@@ -64,7 +64,7 @@ export default function Navbar() {
     });
 
   return (
-    <>
+    <section>
       <header className="w-full border-gray-200 bg-white hidden sm:flex xl:hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div>
@@ -122,7 +122,7 @@ export default function Navbar() {
           paddingBottom: "env(safe-area-inset-bottom)", 
         }}
       >
-        <ul className="flex items-baseline justify-between">
+        <ul className="flex items-baseline justify-between pb-2">
           {navItems.map((user) => {
             const isActive = user.key === inferredActive;
             return (
@@ -147,6 +147,6 @@ export default function Navbar() {
           })}
         </ul>
       </div>
-    </>
+    </section>
   );
 }
