@@ -112,7 +112,7 @@ const page = () => {
           </div>
           <div className="flex items-center gap-4 sm:gap-6 mt-2 sm:mt-auto">
             <Link
-              href="/Register"
+              href="/login"
               className="text-xs sm:text-xs font-semibold underline ring-offset-8 decoration-gray-200 underline-offset-10 decoration-2"
             >
               Login to your account
