@@ -1,8 +1,5 @@
 import Image from "next/image";
 import Navbar from "@/components/sections/navs/navbar";
-import Link from "next/link";
-import React from "react";
-import { navItems } from "@/components/text/csc";
 export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -102,30 +99,6 @@ export default function Home() {
           Go to nextjs.org →
         </a>
       </footer>
-
-      {/* mobile nave */}
-      <div
-        className="fixed inset-x-0 bottom-0 px-2 pt-3 pb-5 bg-white z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden"
-        style={{
-          paddingBottom: "env(safe-area-inset-bottom)",
-        }}
-      >
-        <ul className="flex items-baseline justify-between pb-2">
-          {navItems.map((user) => {
-            return (
-              <li key={user.key}>
-                <Link href={user.href}>
-                  <span className={`mx-auto `}>{user.icon} </span>
-                  <div className={`text-center text-[10px] sm:text-sm `}>
-                    {" "}
-                    {user.label}
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
     </div>
   );
 }
