@@ -64,55 +64,84 @@ export default function Navbar() {
     });
 
   return (
-    <header className="w-full border-gray-200 bg-white xl:hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div>
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/">
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/logo.png"
-                  alt="CSC logo"
-                  width={100}
-                  height={100}
-                  className="w-10 md:w-20 h-10 md:h-20 object-contain"
-                />
-                <div className="hidden sm:block text-sm font-semibold">
-                  CSC ESCROW &amp; SETTLEMENT UK LTD
+    <>
+      <header className="w-full border-gray-200 bg-white hidden sm:flex xl:hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div>
+            <div className="flex items-center justify-between h-16">
+              {/* Logo */}
+              <Link href="/">
+                <div className="flex items-center gap-3">
+                  <Image
+                    src="/logo.png"
+                    alt="CSC logo"
+                    width={100}
+                    height={100}
+                    className="w-10 md:w-20 h-10 md:h-20 object-contain"
+                  />
+                  <div className="hidden sm:block text-sm font-semibold">
+                    CSC ESCROW &amp; SETTLEMENT UK LTD
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
 
-            {/* Hamburger */}
-            <button
-              onClick={() => setOpen((s) => !s)}
-              className="p-2 md:hidden rounded-md text-gray-700 hover:bg-white/60"
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-            >
-              {open ? <HiX size={22} /> : <HiOutlineMenu size={22} />}
-            </button>
+              {/* Hamburger */}
+              <button
+                onClick={() => setOpen((s) => !s)}
+                className="p-2 md:hidden rounded-md text-gray-700 hover:bg-white/60"
+                aria-expanded={open}
+                aria-controls="mobile-menu"
+              >
+                {open ? <HiX size={22} /> : <HiOutlineMenu size={22} />}
+              </button>
+            </div>
+
+            <nav className="pb-4 hidden md:flex font-light">
+              {renderNavLinks(true)}
+            </nav>
           </div>
 
-          <nav className="pb-4 hidden md:flex font-light">
-            {renderNavLinks(true)}
-          </nav>
+          {/* Dropdown Menu */}
+          <div
+            ref={menuRef}
+            id="mobile-menu"
+            className={`absolute left-0 right-0 z-40 bg-white shadow-lg  transition-all duration-200 origin-top transform ${
+              open
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-95 pointer-events-none"
+            }`}
+          >
+            <nav className="px-2 pb-4 space-y-1">{renderNavLinks(true)}</nav>
+          </div>
         </div>
+      </header>
 
-        {/* Dropdown Menu */}
-        <div
-          ref={menuRef}
-          id="mobile-menu"
-          className={`absolute left-0 right-0 z-40 bg-white shadow-lg  transition-all duration-200 origin-top transform ${
-            open
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-95 pointer-events-none"
-          }`}
-        >
-          <nav className="px-2 pb-4 space-y-1">{renderNavLinks(true)}</nav>
-        </div>
+      <div className="fixed bottom-0 w-full p-2 bg-white hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden">
+        <ul className="flex items-baseline justify-between">
+          {navItems.map((user) => {
+            const isActive = user.key === inferredActive;
+            return (
+              <li key={user.key}>
+                <Link href={user.href}>
+                  <span
+                    className={`mx-auto ${isActive ? "text-[#3E2BCE]/50" : ""}`}
+                  >
+                    {user.icon}{" "}
+                  </span>
+                  <div
+                    className={`text-center text-[10px] sm:text-sm ${
+                      isActive ? "text-[#3E2BCE]/50" : ""
+                    }`}
+                  >
+                    {" "}
+                    {user.label}
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-    </header>
+    </>
   );
 }

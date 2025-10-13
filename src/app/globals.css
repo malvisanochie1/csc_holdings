@@ -267,3 +267,9 @@ hr.horizontal {
   background-color: transparent;
 }
 
+.nav-blue-text {
+  @apply text-[#3E2BCE];
+}
+.nav-blue-bg {
+  @apply bg-[#3E2BCE];
+}

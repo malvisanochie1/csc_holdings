@@ -187,31 +187,31 @@ export const navItems = [
     key: "dashboard",
     label: "Dashboard",
     href: "/dashboard",
-    icon: <BsBank2 size={15} />,
+    icon: <BsBank2 size={15} className="mx-auto text-" />,
   },
   {
     key: "profile",
     label: "Profile",
     href: "/profile",
-    icon: <FaUser size={15} />,
+    icon: <FaUser size={15} className="mx-auto text-" />,
   },
   {
     key: "transactions",
     label: "Transactions",
     href: "/dashboard/transactions",
-    icon: <FaCommentsDollar size={15} />,
+    icon: <FaCommentsDollar size={15} className="mx-auto text-" />,
   },
   {
     key: "notifications",
     label: "Notifications",
     href: "/notification",
-    icon: <FaBell size={15} />,
+    icon: <FaBell size={15} className="mx-auto text-" />,
   },
   {
     key: "logout",
     label: "Logout",
     href: "/login",
-    icon: <TbLogout2 size={15} />,
+    icon: <TbLogout2 size={15} className="mx-auto text-" />,
   },
 ];
 

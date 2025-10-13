@@ -69,8 +69,8 @@ export default function Sidebar({ active }: SidebarProps) {
                 <span
                   className={`grid place-content-center w-7 h-7 rounded px-2 ${
                     isActive
-                      ? "bg-[#3E2BCE] text-gray-300"
-                      : "bg-white shadow text-[#3E2BCE] group-hover:bg-white"
+                      ? "nav-blue-bg text-gray-300"
+                      : "bg-white shadow nav-blue-text group-hover:bg-white"
                   }`}
                 >
                   <span
