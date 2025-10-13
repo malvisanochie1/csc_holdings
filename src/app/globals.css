@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -111,6 +112,80 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
+.lato {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+}
+
+.font-extralight {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.font-light {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.font-medium {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.font-semibold {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-bold {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.font-extrabold {
+  font-family: "Lato", sans-serif;
+  font-weight: 80;
+  font-style: normal;
+}
+
+.font-black {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.font-thin {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.font-light {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.font-regular {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-bold {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-black {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
 
 /* WebKit-based browsers */
 html::-webkit-scrollbar,
@@ -181,8 +256,13 @@ body::-webkit-scrollbar {
 }
 
 hr.horizontal.dark {
-    background-image: linear-gradient(to right, #00000000, #00000066, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(
+    to right,
+    #00000000,
+    #00000066,
+    rgba(0, 0, 0, 0)
+  );
 }
 hr.horizontal {
-    background-color: transparent;
+  background-color: transparent;
 }

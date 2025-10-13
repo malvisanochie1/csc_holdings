@@ -21,7 +21,6 @@ const recoveryandTransactionStatus = () => {
             </span>{" "}
             Incoming Funds Reclaims .
           </div>
-
           <Table className="min-h-40 sm:min-h-96 ">
             <TableHeader>
               <TableRow>
@@ -47,9 +46,7 @@ const recoveryandTransactionStatus = () => {
             </TableBody>
           </Table>
         </div>
-        <div className="">
-          <RecoveryMap />
-        </div>
+        <RecoveryMap />
       </div>
     </>
   );

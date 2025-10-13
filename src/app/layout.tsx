@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`home-bg ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`home-bg lato ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
         <div className="flex home-bg lg:h-screen">
