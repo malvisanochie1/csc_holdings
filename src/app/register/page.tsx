@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 const page = () => {
   return (
-    <div className="p-3">
+    <div className="p-3 max-h-screen overflow-y-auto">
       <div className="max-w-md mx-auto card p-3 sm:p-5 py-10 sm:py-8  md:p-10 mt-20 ">
         <div className="w-full">
           <h1 className="text-xl sm:text-2xl font-bold">
@@ -62,17 +62,27 @@ const page = () => {
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="password" className="font-semibold">
-                  Password
+                <FieldLabel htmlFor="phone" className="font-semibold">
+                  Phone
                 </FieldLabel>
                 <Input
                   className="focus-visible:ring-0 rounded bg-[#E8F0FE]"
-                  type="password"
-                  id="password"
-                  placeholder="........."
+                  type="tel"
+                  id="phone"
+                  placeholder="Your Phone"
                 />
               </Field>
-              <Field className="mt-4 sm:mt-6">
+              <Field>
+                <FieldLabel htmlFor="country" className="font-semibold">
+                  Country
+                </FieldLabel>
+                <Input
+                  className="focus-visible:ring-0 rounded bg-[#E8F0FE]"
+                  type="text"
+                  id="country"
+                />
+              </Field>
+              <Field>
                 <FieldLabel htmlFor="password" className="font-semibold">
                   Password
                 </FieldLabel>
@@ -80,28 +90,32 @@ const page = () => {
                   className="focus-visible:ring-0 rounded bg-[#E8F0FE]"
                   type="password"
                   id="password"
-                  placeholder=""
+                />
+              </Field>
+              <Field className="">
+                <FieldLabel htmlFor="confirmPassword" className="font-semibold">
+                  Confirm Password
+                </FieldLabel>
+                <Input
+                  className="focus-visible:ring-0 rounded bg-[#E8F0FE]"
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Confirm password"
                 />
               </Field>
             </FieldGroup>
           </FieldSet>
           <div className="flex items-center gap-4 sm:gap-6 mt-6 sm:mt-auto">
             <button className="bg-gray-700 text-white px-4 sm:px-6 md:px-8 py-1 text-sm lato-bold rounded my-4 md:my-6">
-              Login
+              Register now
             </button>
-            <Link
-              href="/forgot-password"
-              className="text-xs sm:text-xs font-bold hover:underline"
-            >
-              Forgot Password?
-            </Link>
           </div>
           <div className="flex items-center gap-4 sm:gap-6 mt-2 sm:mt-auto">
             <Link
               href="/Register"
               className="text-xs sm:text-xs font-semibold underline ring-offset-8 decoration-gray-200 underline-offset-10 decoration-2"
             >
-              Register new account
+              Login to your account
             </Link>
           </div>
         </div>
