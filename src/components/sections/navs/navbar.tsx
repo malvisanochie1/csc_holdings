@@ -115,8 +115,13 @@ export default function Navbar() {
           </div>
         </div>
       </header>
-
-      <div className="fixed bottom-0 w-full p-2 py-2.5 bg-white z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden">
+      {/* mobile nave */}
+      <div
+        className="fixed inset-x-0 bottom-0 px-2 pt-3 pb-5 bg-white z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden"
+        style={{
+          paddingBottom: "env(safe-area-inset-bottom)", 
+        }}
+      >
         <ul className="flex items-baseline justify-between">
           {navItems.map((user) => {
             const isActive = user.key === inferredActive;

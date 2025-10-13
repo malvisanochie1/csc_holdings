@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`home-bg lato ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`home-bg lato relative ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
           <div className="w-full">{children}</div>
       </body>
