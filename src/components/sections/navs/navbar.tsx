@@ -116,7 +116,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      <div className="fixed bottom-0 w-full p-2 bg-white hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden">
+      <div className="fixed bottom-0 w-full p-2 py-2.5 bg-white z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden">
         <ul className="flex items-baseline justify-between">
           {navItems.map((user) => {
             const isActive = user.key === inferredActive;
