@@ -12,133 +12,86 @@ export type NavKey =
   | "notifications"
   | "logout";
 
-interface AccountOverviewItem {
+interface AccountAssets {
   img: string;
   currency: string;
   amount: number;
-  option: { option1: string; option2: string }[];
+  option: string;
   className?: string;
 }
-
-export const account_overview: AccountOverviewItem[] = [
+interface AccountCurrency {
+  img: string;
+  currency: string;
+  amount: number;
+  option: string;
+  className?: string;
+}
+export const account_assets: AccountAssets[] = [
   {
     img: "/dashboard/account_overview/gold.png",
     currency: "Gold",
     amount: 10000,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
-    className: "",
+    option: "convert",
   },
   {
     img: "/dashboard/account_overview/silver.png",
     currency: "Silver",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
-    className: "",
+    option: "convert",
   },
   {
     img: "/dashboard/account_overview/platinum.png",
     currency: "Platinum",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
-    className: "",
+    option: "convert",
   },
   {
     img: "/dashboard/account_overview/stock.webp",
     currency: "Stocks",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
+    option: "convert",
     className: "lg:!col-span-2",
   },
   {
     img: "/dashboard/account_overview/btc.png",
     currency: "Bitcoin",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
+    option: "convert",
     className: "lg:!col-span-2",
   },
+];
+
+export const account_currency: AccountCurrency[] = [
   {
     img: "/dashboard/account_overview/dollar-symbol.png",
     currency: "USD",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
-    className: "",
+    option: "withdraw",
   },
   {
     img: "/dashboard/account_overview/euro.png",
     currency: "Euro",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
-    className: "",
+    option: "withdraw",
   },
   {
     img: "/dashboard/account_overview/pound-sterling.png",
     currency: "Pounds",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
-    className: "",
+    option: "withdraw",
   },
   {
     img: "/dashboard/account_overview/yen.png",
     currency: "Yen",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
+    option: "withdraw",
     className: "lg:col-span-2",
   },
   {
     img: "/dashboard/account_overview/Bahraini.png",
     currency: "Bahraini Dinar",
     amount: 0,
-    option: [
-      {
-        option1: "convert",
-        option2: "withdraw",
-      },
-    ],
+    option: "withdraw",
     className: "lg:col-span-2",
   },
 ];
@@ -214,4 +167,3 @@ export const navItems = [
     icon: <TbLogout2 size={15} className="mx-auto text-" />,
   },
 ];
-

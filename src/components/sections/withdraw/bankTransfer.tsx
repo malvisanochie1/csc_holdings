@@ -2,18 +2,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Field, FieldLabel } from "@/components/ui/field";
 
-const COUNTRIES = [
-  "Select country",
-  "United States",
-  "United Kingdom",
-  "Germany",
-  "United Arab Emirates",
-  "Bahrain",
-  "Japan",
-];
+// const COUNTRIES = [
+//   "Select country",
+//   "United States",
+//   "United Kingdom",
+//   "Germany",
+//   "United Arab Emirates",
+//   "Bahrain",
+//   "Japan",
+// ];
 
 const BankTransfer = () => {
   return (

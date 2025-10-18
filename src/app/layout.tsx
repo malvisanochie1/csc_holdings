@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={`home-bg lato relative ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          <div className="w-full">{children}</div>
+        <div className="w-full">{children}</div>
       </body>
     </html>
   );

@@ -5,14 +5,18 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { account_overview } from "@/components/text/csc";
-const insufficientBalance = () => {
+
+interface InsufficientBalanceProps {
+  triggerText?: string;
+}
+
+const insufficientBalance = ({
+  triggerText = "withdraw",
+}: InsufficientBalanceProps) => {
   return (
     <div>
       <AlertDialog>
-        <AlertDialogTrigger>
-          {account_overview[0].option[0].option2}
-        </AlertDialogTrigger>
+        <AlertDialogTrigger>{triggerText} </AlertDialogTrigger>
         <AlertDialogContent>
           <div
             role="alert"
