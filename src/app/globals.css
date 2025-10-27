@@ -234,10 +234,10 @@ body::-webkit-scrollbar {
 }
 
 .card {
-  @apply bg-white rounded-2xl;
+  @apply bg-white dark:bg-gray-800 rounded-2xl;
 }
 .home-bg {
-  @apply bg-[#CFD5DC];
+  @apply bg-[#CFD5DC] dark:bg-slate-900;
 }
 .header {
   @apply text-gray-600 font-bold text-lg sm:text-xl;
@@ -268,8 +268,12 @@ hr.horizontal {
 }
 
 .nav-blue-text {
-  @apply text-[#3E2BCE];
+  @apply text-[#3E2BCE] ;
 }
 .nav-blue-bg {
   @apply bg-[#3E2BCE];
+}
+
+.gradient{
+  @apply bg-gradient-to-br from-teal-400 to-indigo-600 dark:from-teal-800 dark:to-indigo-900
 }

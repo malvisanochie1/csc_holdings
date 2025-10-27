@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { NavKey, navItems } from "../../text/csc";
 import RecoveryPortal from "../recoveryPortal";
+import { ModeToggle } from "@/components/ui/modetoggle";
 interface SidebarProps {
   active?: NavKey;
 }
@@ -29,7 +30,7 @@ export default function Sidebar({ active }: SidebarProps) {
       {/* Upper content */}
       <div className="flex-1">
         <Link href="/">
-          <div className="flex flex-col gap-3 mb-4 ps-6">
+          <div className="flex flex-col gap-3 mb-4 ps-6 dark:text-gray-300">
             <Image
               src="/logo.png"
               alt="CSC logo"
@@ -55,8 +56,8 @@ export default function Sidebar({ active }: SidebarProps) {
             const isActive = item.key === currentActive;
             const linkClass = `flex items-center gap-3 p-3 rounded transition-all duration-150 group ${
               isActive
-                ? "bg-white shadow-md ring-1 ring-gray-200"
-                : "hover:bg-white hover:rounded-none"
+                ? "bg-white shadow-md ring-1 dark:ring-slate-800 ring-gray-200 dark:bg-slate-800"
+                : "hover:bg-white hover:rounded hover:dark:bg-slate-800 rounded"
             }`;
 
             return (
@@ -70,7 +71,7 @@ export default function Sidebar({ active }: SidebarProps) {
                   className={`grid place-content-center w-7 h-7 rounded px-2 ${
                     isActive
                       ? "nav-blue-bg text-gray-300"
-                      : "bg-white shadow nav-blue-text group-hover:bg-white"
+                      : "bg-white dark:bg-slate-800 shadow nav-blue-text group-hover:bg-white dark:nav-blue-bg"
                   }`}
                 >
                   <span
@@ -84,7 +85,7 @@ export default function Sidebar({ active }: SidebarProps) {
 
                 <span
                   className={`text-sm font-medium ${
-                    isActive ? "text-gray-800" : "text-gray-600"
+                    isActive ? "text-gray-800 dark:text-gray-500" : "text-gray-600 dark:text-gray-400"
                   }`}
                 >
                   {item.label}
@@ -92,6 +93,8 @@ export default function Sidebar({ active }: SidebarProps) {
               </Link>
             );
           })}
+
+          <ModeToggle />
         </nav>
       </div>
 

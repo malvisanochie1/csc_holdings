@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
-import Sidebar from "@/components/sections/navs/sidebar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-import Navbar from "@/components/sections/navs/navbar";
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -27,7 +27,14 @@ export default function RootLayout({
       <body
         className={`home-bg lato relative ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="w-full">{children}</div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="w-full">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );

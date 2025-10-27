@@ -4,12 +4,14 @@ import { FaUser } from "react-icons/fa";
 import { FaCommentsDollar } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { TbLogout2 } from "react-icons/tb";
+import { IoSettings } from "react-icons/io5";
 
 export type NavKey =
   | "dashboard"
   | "profile"
   | "transactions"
   | "notifications"
+  | "setting"
   | "logout";
 
 interface AccountAssets {
@@ -159,6 +161,12 @@ export const navItems = [
     label: "Notifications",
     href: "/notification",
     icon: <FaBell size={15} className="mx-auto text-" />,
+  },
+  {
+    key: "setting",
+    label: "Setting",
+    href: "/setting",
+    icon: <IoSettings size={15} className="mx-auto text-" />,
   },
   {
     key: "logout",

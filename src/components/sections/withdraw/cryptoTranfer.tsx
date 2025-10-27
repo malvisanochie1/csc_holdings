@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel } from "@/components/ui/field";
 
-const BitcoinTransfer = () => {
+const CryptoTranfer = () => {
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-4 sm:pt-6 md:pt-8 lg:pt-10 p-2 sm:px-6 py-4 md:px-8">
@@ -33,4 +33,4 @@ const BitcoinTransfer = () => {
   );
 };
 
-export default BitcoinTransfer;
+export default CryptoTranfer;

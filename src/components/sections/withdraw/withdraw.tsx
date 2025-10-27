@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import BankTransfer from "./bankTransfer";
-import BitcoinTransfer from "./bitcoinTransfer";
+import BitcoinTransfer from "./cryptoTranfer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BsBank } from "react-icons/bs";
 import { BsCurrencyBitcoin } from "react-icons/bs";

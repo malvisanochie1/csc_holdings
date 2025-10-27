@@ -6,13 +6,13 @@ const recoveryPortal = () => {
     <>
       <div className="px-4">
         <div className="rounded-2xl overflow-hidden shadow-lg">
-          <div className="p-4 bg-gradient-to-br from-teal-400 to-indigo-600 text-white">
+          <div className="p-4 gradient text-white">
             <div className="flex items-center justify-center mb-3">
               <div className="bg-white/20 rounded-full p-2">
                 <VscDebugRestart size={14} />
               </div>
             </div>
-            <div className="text-sm font-semibold">Asset Recovery Portal</div>
+            <div className="text-sm font-semibold">Recovery verification portal</div>
             <div className="mt-3">
               <button className="w-full inline-flex items-center justify-center gap-2 bg-white text-orange-600 rounded-md py-2 text-xs font-semibold">
                 <svg
