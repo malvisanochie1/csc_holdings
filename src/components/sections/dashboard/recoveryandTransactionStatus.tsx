@@ -67,7 +67,7 @@ const RecoveryAndTransactionStatus = () => {
                   <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">
                     Incoming Orders
                   </h3>
-                  <p className="text-xs text-white/50">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     Open positions and recent activity
                   </p>
                 </div>
@@ -85,7 +85,7 @@ const RecoveryAndTransactionStatus = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
                           <span
-                            className={`text-xs font-medium text-white ${
+                            className={`text-xs font-medium text-gray-100  ${
                               record.status === "completed"
                                 ? "bg-green-600"
                                 : record.status === "pending"
@@ -95,26 +95,26 @@ const RecoveryAndTransactionStatus = () => {
                           >
                             {record.status?.toUpperCase()}
                           </span>
-                          <span className="text-sm text-white">
+                          <span className="text-sm text-gray-500 dark:text-gray-400">
                             {record.entity} • {record.assets}
                           </span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="text-sm text-white">
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
                             {record.value}
                           </div>
-                          <IoChevronDown className="w-4 h-4 text-white/60" />
+                          <IoChevronDown className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                         </div>
                       </div>
                     </Disclosure.Button>
 
                     <Disclosure.Panel>
-                      <div className="divide-y divide-white/5 bg-[#0b1220]">
+                      <div className="divide-y divide-white/5 dark:bg-[#0b1220] bg-gray-100">
                         <div className="px-4 py-4">
                           <div className="flex items-start justify-between">
                             <div className="flex items-start space-x-3">
                               <span
-                                className={`text-xs font-medium text-white ${
+                                className={`text-xs font-medium text-gray-50  ${
                                   record.status === "completed"
                                     ? "bg-green-600"
                                     : record.status === "pending"
@@ -126,7 +126,7 @@ const RecoveryAndTransactionStatus = () => {
                               </span>
                               <div>
                                 <div className="flex items-center space-x-2">
-                                  <span className="text-sm font-semibold text-white">
+                                  <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">
                                     {record.entity}
                                   </span>
                                   <span className="text-xs text-white/40">
@@ -139,7 +139,7 @@ const RecoveryAndTransactionStatus = () => {
                               <div className="text-sm font-semibold text-green-400">
                                 ${record.value}
                               </div>
-                              <div className="text-xs text-white/50">
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
                                 Current
                               </div>
                             </div>
@@ -147,28 +147,28 @@ const RecoveryAndTransactionStatus = () => {
                         </div>
 
                         <div className="px-4 py-3">
-                          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-white/80">
-                            <dt className="text-white/60">DATE</dt>
-                            <dd className="text-right text-white">
+                          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">DATE</dt>
+                            <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.date}
                             </dd>
 
-                            <dt className="text-white/60">ENTITY</dt>
-                            <dd className="text-right text-white">
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">ENTITY</dt>
+                            <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.entity}
                             </dd>
 
-                            <dt className="text-white/60">ASSETS</dt>
-                            <dd className="text-right text-white">
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">ASSETS</dt>
+                            <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.assets}
                             </dd>
 
-                            <dt className="text-white/60">STATUS</dt>
-                            <dd className="text-right text-white">
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">STATUS</dt>
+                            <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.status}
                             </dd>
 
-                            <dt className="text-white/60">VALUE</dt>
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">VALUE</dt>
                             <dd className="text-right text-white">
                               {record.value}
                             </dd>
@@ -178,7 +178,7 @@ const RecoveryAndTransactionStatus = () => {
                         <div className="px-4 py-3">
                           <Disclosure.Button
                             as="button"
-                            className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white"
+                            className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-gray-500 dark:text-gray-400"
                           >
                             Close
                           </Disclosure.Button>
