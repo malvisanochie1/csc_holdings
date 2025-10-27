@@ -109,7 +109,7 @@ const RecoveryAndTransactionStatus = () => {
                     </Disclosure.Button>
 
                     <Disclosure.Panel>
-                      <div className="divide-y divide-white/5 dark:bg-[#0b1220] bg-gray-100">
+                      <div className="divide-y rounded-b-lg divide-white/5 dark:bg-[#0b1220] bg-gray-100">
                         <div className="px-4 py-4">
                           <div className="flex items-start justify-between">
                             <div className="flex items-start space-x-3">
@@ -148,27 +148,37 @@ const RecoveryAndTransactionStatus = () => {
 
                         <div className="px-4 py-3">
                           <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
-                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">DATE</dt>
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">
+                              DATE
+                            </dt>
                             <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.date}
                             </dd>
 
-                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">ENTITY</dt>
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">
+                              ENTITY
+                            </dt>
                             <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.entity}
                             </dd>
 
-                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">ASSETS</dt>
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">
+                              ASSETS
+                            </dt>
                             <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.assets}
                             </dd>
 
-                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">STATUS</dt>
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">
+                              STATUS
+                            </dt>
                             <dd className="text-right text-gray-500 dark:text-gray-400">
                               {record.status}
                             </dd>
 
-                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">VALUE</dt>
+                            <dt className="text-gray-600 dark:text-gray-400 font-semibold">
+                              VALUE
+                            </dt>
                             <dd className="text-right text-white">
                               {record.value}
                             </dd>
@@ -178,7 +188,7 @@ const RecoveryAndTransactionStatus = () => {
                         <div className="px-4 py-3">
                           <Disclosure.Button
                             as="button"
-                            className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-gray-500 dark:text-gray-400"
+                            className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-gray-100 "
                           >
                             Close
                           </Disclosure.Button>
