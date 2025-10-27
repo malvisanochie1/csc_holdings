@@ -18,7 +18,7 @@ const RecoveryAndTransactionStatus = () => {
   return (
     <>
       <div className="recoveryandTransactionStatus">
-        <div className="col-span-2 card p-4 max-h-[600px]">
+        <div className="lg:col-span-2 card p-4 max-h-[600px] hidden lg:flex">
           <div className="text-gray-400 font-bold flex items-center space-x-2 my-3 sm:my-5">
             <span>
               <RiExchangeFundsLine className="text-blue-500 me-2" />
@@ -59,12 +59,12 @@ const RecoveryAndTransactionStatus = () => {
         </div>
 
         {/* Mobile: compact disclosure list */}
-        <div className="sm:hidden-">
-          <div className="w-full px-4 pt-6">
-            <div className="mx-auto w-full max-w-lg overflow-hidden rounded-xl bg-white/5 shadow-sm">
+        <div className="flex w-full md:hidden card">
+          <div className="w-full px-4 py-6">
+            <div className="mx-auto w-full max-w-lg overflow-hidden rounded-xl shadow-sm">
               <div className="flex items-center justify-between px-4 py-3">
                 <div>
-                  <h3 className="text-sm font-semibold text-white">
+                  <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">
                     Incoming Orders
                   </h3>
                   <p className="text-xs text-white/50">
@@ -73,7 +73,7 @@ const RecoveryAndTransactionStatus = () => {
                 </div>
               </div>
 
-              <div className="divide-y divide-white/5">
+              <div className="divide-y divide-white/5 ">
                 {Incoming_funds_reclaim_history.map((record, idx) => (
                   <Disclosure key={record.date + idx}>
                     <Disclosure.Button
