@@ -165,7 +165,7 @@ export const navItems = [
   {
     key: "setting",
     label: "Setting",
-    href: "/setting",
+    href: "/settings",
     icon: <IoSettings size={15} className="mx-auto text-" />,
   },
   {
