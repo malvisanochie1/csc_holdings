@@ -10,6 +10,12 @@ import {
 import { MdMoreVert } from "react-icons/md";
 import { MdDiamond } from "react-icons/md";
 import { Withdraw } from "../withdraw/withdraw";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+
 const accountOverview = () => {
   return (
     <>
@@ -83,8 +89,31 @@ const accountOverview = () => {
           </div>
         </div>
         <div className="lg:col-span-2 card p-2 sm:p-4">
-          <div className="p-2 sm:p-5 bg-gradient-to-br from-[#5FC2C1] to-[#676DD3] dark:from-[#5fc2c072] dark:to-[#676DD374] card  dark:text-gray-300 text-white flex flex-col space-y-2 sm:space-y-3">
-            <h1 className="text-lg sm:text-xl md:text-2xl font-bold flex items-center">
+          <div className="p-2 sm:p-5 bg-gradient-to-br from-[#5FC2C1] to-[#676DD3] dark:from-[#5fc2c072] dark:to-[#676DD374] card  dark:text-gray-300 text-white flex flex-col space-y-2 sm:space-y-3 w-full">
+            <Disclosure as="div" className="w-full">
+              <DisclosureButton className="w-full">
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold flex items-start w-full md:text-center">
+                  <span className="p-1 pb-2 rounded-md  dark:bg-gray-300 bg-white w-7 sm:w-9 h-7 sm:h-9 flex justify-center me-2 text-gray-600">
+                    <MdDiamond />
+                  </span>{" "}
+                  Award Winning Escrow Services
+                </h1>
+
+                {/* <IoChevronDown className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" /> */}
+              </DisclosureButton>
+              <DisclosurePanel className="">
+                <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
+                  Your funds re-claim and recovery journey is very important to
+                  us. Trust us to put your priorities first in getting back your
+                  money.
+                </p>
+                <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
+                  NOTE: YOU ARE ELIGIBLE FOR THE FIAT WITHDRAWAL.
+                </p>{" "}
+              </DisclosurePanel>
+            </Disclosure>
+
+            {/* <h1 className="text-lg sm:text-xl md:text-2xl font-bold flex items-center">
               <span className="p-1 pb-2 rounded-md  dark:bg-gray-300 bg-white w-7 sm:w-9 h-7 sm:h-9 flex justify-center me-2 text-gray-600">
                 <MdDiamond />
               </span>{" "}
@@ -99,7 +128,7 @@ const accountOverview = () => {
             </p>
             <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
               NOTE: YOU ARE ELIGIBLE FOR THE FIAT WITHDRAWAL.
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

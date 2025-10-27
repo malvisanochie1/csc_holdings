@@ -31,7 +31,7 @@ export function Withdraw({ triggerText = "Withdraw" }: WithdrawProps) {
               <div className="">
                 <BsCurrencyBitcoin size={40} className="text-center mx-auto" />
                 <h2 className="text-center text-lg sm:text-xl  font-light mt-2 ">
-                  Bitcoin Transfer
+                  Crypto Transfer
                 </h2>
               </div>
             </TabsTrigger>

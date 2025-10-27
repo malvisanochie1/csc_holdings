@@ -5,6 +5,7 @@ import RecoveryandTransactionStatus from "@/components/sections/dashboard/recove
 import RecoveryPortal from "@/components/sections/recoveryPortal";
 import Navbar from "@/components/sections/navs/navbar";
 import Sidebar from "@/components/sections/navs/sidebar";
+import PaymentSuccessful from "@/components/modals/withdrawal/paymentSuccessful";
 
 const page = () => {
   return (
@@ -19,6 +20,7 @@ const page = () => {
             <div className="lg:hidden pb-4">
               <RecoveryPortal />
             </div>
+            <PaymentSuccessful />
             <AccountOverview />
             <FinancialAssets />
             <RecoveryandTransactionStatus />
