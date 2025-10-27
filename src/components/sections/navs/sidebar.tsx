@@ -26,7 +26,7 @@ export default function Sidebar({ active }: SidebarProps) {
 
   const currentActive = (active ?? inferredActive) as NavKey;
   return (
-    <aside className="w-full h-full overflow-y-auto min-h-screen border-r border-gray-200 pt-4 flex flex-col pb-2">
+    <aside className="w-full h-full overflow-y-auto min-h-screen border-r dark:border-gray-700 border-gray-200 pt-4 flex flex-col pb-2">
       {/* Upper content */}
       <div className="flex-1">
         <Link href="/">
@@ -85,7 +85,9 @@ export default function Sidebar({ active }: SidebarProps) {
 
                 <span
                   className={`text-sm font-medium ${
-                    isActive ? "text-gray-800 dark:text-gray-500" : "text-gray-600 dark:text-gray-400"
+                    isActive
+                      ? "text-gray-800 dark:text-gray-500"
+                      : "text-gray-600 dark:text-gray-400"
                   }`}
                 >
                   {item.label}
@@ -94,7 +96,7 @@ export default function Sidebar({ active }: SidebarProps) {
             );
           })}
 
-          <ModeToggle />
+          {/* <ModeToggle /> */}
         </nav>
       </div>
 

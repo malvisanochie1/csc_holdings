@@ -175,3 +175,34 @@ export const navItems = [
     icon: <TbLogout2 size={15} className="mx-auto text-" />,
   },
 ];
+
+export const Incoming_funds_reclaim_history = [
+  {
+    date: "2025-10-09 13:16:58",
+    entity: "NB LTD",
+    assets: "Gold",
+    status: "completed",
+    value: "10,000",
+  },
+    {
+    date: "2025-10-09 04:16:58",
+    entity: "NB LTD",
+    assets: "solana",
+    status: "completed",
+    value: "1,000",
+  },
+    {
+    date: "2025-10-08 13:16:58",
+    entity: "NB LTD",
+    assets: "Etherum",
+    status: "pending",
+    value: "5,000",
+  },
+    {
+    date: "2025-10-07 13:16:58",
+    entity: "NB LTD",
+    assets: "Bitcoin",
+    status: "failed",
+    value: "2,500",
+  },
+];

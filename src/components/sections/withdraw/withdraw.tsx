@@ -39,7 +39,7 @@ export function Withdraw({ triggerText = "Withdraw" }: WithdrawProps) {
               <div className="">
                 <BsBank size={40} className="text-center mx-auto" />
                 <h2 className="text-center text-lg sm:text-xl  font-light mt-2 ">
-                  Bank Tranfer
+                  Bank Transfer
                 </h2>
               </div>
             </TabsTrigger>
