@@ -12,7 +12,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-
 import { ModeToggle } from "@/components/ui/modetoggle";
 export default function SettingsPage() {
   const [currency, setCurrency] = useState("USD");
@@ -152,7 +151,7 @@ export default function SettingsPage() {
               >
                 Select Theme
               </Label>
-              <Select value={theme} onValueChange={setTheme}>
+              {/* <Select value={theme} onValueChange={setTheme}>
                 <SelectTrigger
                   id="theme"
                   className="w-full md:w-64 border-border"
@@ -164,8 +163,8 @@ export default function SettingsPage() {
                   <SelectItem value="dark">Dark Mode</SelectItem>
                   <SelectItem value="auto">Auto (System)</SelectItem>
                 </SelectContent>
-              </Select>
-              {/* <ModeToggle /> */}
+              </Select> */}
+              <ModeToggle />
             </div>
           </Card>
         </div>
