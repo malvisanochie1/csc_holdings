@@ -18,7 +18,7 @@ const RecoveryAndTransactionStatus = () => {
   return (
     <>
       <div className="recoveryandTransactionStatus">
-        <div className="lg:col-span-2 card p-4 max-h-[600px] hidden lg:flex">
+        <div className="lg:col-span-2 card p-4 max-h-[600px] hidden lg:flex flex-col">
           <div className="text-gray-400 font-bold flex items-center space-x-2 my-3 sm:my-5">
             <span>
               <RiExchangeFundsLine className="text-blue-500 me-2" />
