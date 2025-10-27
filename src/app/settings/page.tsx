@@ -13,17 +13,6 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { ModeToggle } from "@/components/ui/modetoggle";
-
-import * as React from "react";
-import { Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 export default function SettingsPage() {
   const [currency, setCurrency] = useState("USD");
   const [language, setLanguage] = useState("en");
@@ -162,73 +151,20 @@ export default function SettingsPage() {
               >
                 Select Theme
               </Label>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    id="theme"
-                    className="w-full md:w-64 border-border justify-between flex items-center"
-                  >
-                    <div className="flex items-center gap-3">
-                      {theme === "light" && (
-                        <Sun className="w-4 h-4 text-yellow-500" />
-                      )}
-                      {theme === "dark" && (
-                        <Moon className="w-4 h-4 text-purple-500" />
-                      )}
-                      {theme === "system" && (
-                        <Globe className="w-4 h-4 text-blue-500" />
-                      )}
-                      <span className="capitalize">
-                        {theme === "system" ? "System" : theme}
-                      </span>
-                    </div>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-64">
-                  <DropdownMenuItem
-                    onClick={() => setTheme("light")}
-                    className="flex items-center gap-2"
-                  >
-                    <Sun className="w-4 h-4 text-yellow-500" />
-                    Light
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => setTheme("dark")}
-                    className="flex items-center gap-2"
-                  >
-                    <Moon className="w-4 h-4 text-purple-500" />
-                    Dark
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => setTheme("system")}
-                    className="flex items-center gap-2"
-                  >
-                    <Globe className="w-4 h-4 text-blue-500" />
-                    System
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              {/* <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                    <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                    <span className="sr-only">Toggle theme</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => setTheme("light")}>
-                    Light
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    Dark
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("system")}>
-                    System
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>{" "} */}
+              {/* <Select value={theme} onValueChange={setTheme}>
+                <SelectTrigger
+                  id="theme"
+                  className="w-full md:w-64 border-border"
+                >
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="light">Light Mode</SelectItem>
+                  <SelectItem value="dark">Dark Mode</SelectItem>
+                  <SelectItem value="auto">Auto (System)</SelectItem>
+                </SelectContent>
+              </Select> */}
+              <ModeToggle />
             </div>
           </Card>
         </div>
