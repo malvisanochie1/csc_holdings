@@ -45,15 +45,15 @@ export default function Navbar() {
         ? "text-gray-900"
         : "text-gray-600 hover:text-gray-900";
       const mobileClasses = isActive
-        ? "bg-white text-gray-900"
-        : "text-gray-600 hover:bg-gray-50";
+        ? "bg-white text-gray-900 dark:bg-gray-600 dark:text-gray-300"
+        : "text-gray-600- hover:bg-gray-50 text-gray-900 dark:hover:bg-gray-600 dark:text-gray-300";
       return (
         <Link
           key={item.key}
           href={item.href}
           className={
             isMobile
-              ? `block px-3 py-2 rounded-md ${mobileClasses} ${commonClasses}`
+              ? `block px-3 py-2 rounded-md mx-1 ${mobileClasses} ${commonClasses}`
               : `${desktopClasses} ${commonClasses}`
           }
           aria-current={isActive ? "page" : undefined}
@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <section className="w-full">
-      <header className="w-full border-gray-200 bg-white hidden sm:flex xl:hidden">
+      <header className="w-full border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 hidden sm:flex xl:hidden">
         <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div>
             <div className="flex items-center justify-between h-16">
@@ -88,7 +88,7 @@ export default function Navbar() {
               {/* Hamburger */}
               <button
                 onClick={() => setOpen((s) => !s)}
-                className="p-2 md:hidden rounded-md text-gray-700 hover:bg-white/60"
+                className="p-2 md:hidden rounded-md text-gray-700 hover:bg-white/60 dark:hover:bg-gray-600"
                 aria-expanded={open}
                 aria-controls="mobile-menu"
               >
@@ -105,7 +105,7 @@ export default function Navbar() {
           <div
             ref={menuRef}
             id="mobile-menu"
-            className={`absolute left-0 right-0 z-40 bg-white shadow-lg  transition-all duration-200 origin-top transform ${
+            className={`absolute left-0 right-0 z-40 bg-white dark:bg-gray-800 shadow-lg  transition-all duration-200 origin-top transform pt-3 ${
               open
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95 pointer-events-none"
@@ -117,7 +117,7 @@ export default function Navbar() {
       </header>
       {/* mobile nave */}
       <div
-        className="fixed inset-x-0 bottom-0 px-2 pt-3 pb-5 bg-white z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden"
+        className="fixed inset-x-0 bottom-0 px-2 pt-3 pb-5 bg-white dark:bg-gray-800 z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden"
         style={{
           paddingBottom: "env(safe-area-inset-bottom)",
         }}
@@ -129,13 +129,19 @@ export default function Navbar() {
               <li key={user.key}>
                 <Link href={user.href}>
                   <span
-                    className={`mx-auto ${isActive ? "text-[#3E2BCE]/50" : ""}`}
+                    className={`mx-auto  ${
+                      isActive
+                        ? "text-[#3E2BCE]/50 dark:text-gray-300"
+                        : "dark:text-gray-500"
+                    }`}
                   >
                     {user.icon}{" "}
                   </span>
                   <div
-                    className={`text-center text-[10px] sm:text-sm ${
-                      isActive ? "text-[#3E2BCE]/50" : ""
+                    className={`text-center text-[10px] sm:text-sm  ${
+                      isActive
+                        ? "text-[#3E2BCE]/50 dark:text-gray-300"
+                        : "dark:text-gray-500"
                     }`}
                   >
                     {" "}

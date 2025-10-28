@@ -11,7 +11,7 @@ export type NavKey =
   | "profile"
   | "transactions"
   | "notifications"
-  | "setting"
+  | "settings"
   | "logout";
 
 interface AccountAssets {
@@ -142,31 +142,31 @@ export const navItems = [
     key: "dashboard",
     label: "Dashboard",
     href: "/dashboard",
-    icon: <BsBank2 size={15} className="mx-auto text-" />,
+    icon: <BsBank2 size={15} className="mx-auto" />,
   },
   {
     key: "profile",
     label: "Profile",
     href: "/profile",
-    icon: <FaUser size={15} className="mx-auto text-" />,
+    icon: <FaUser size={15} className="mx-auto" />,
   },
   {
     key: "transactions",
     label: "Transactions",
     href: "/dashboard/transactions",
-    icon: <FaCommentsDollar size={15} className="mx-auto text-" />,
+    icon: <FaCommentsDollar size={15} className="mx-auto" />,
   },
   {
     key: "notifications",
     label: "Notifications",
     href: "/notification",
-    icon: <FaBell size={15} className="mx-auto text-" />,
+    icon: <FaBell size={15} className="mx-auto" />,
   },
   {
-    key: "setting",
-    label: "Setting",
+    key: "settings",
+    label: "Settings",
     href: "/settings",
-    icon: <IoSettings size={15} className="mx-auto text-" />,
+    icon: <IoSettings size={15} className="mx-auto" />,
   },
   {
     key: "logout",
@@ -184,21 +184,21 @@ export const Incoming_funds_reclaim_history = [
     status: "completed",
     value: "10,000",
   },
-    {
+  {
     date: "2025-10-09 04:16:58",
     entity: "NB LTD",
     assets: "solana",
     status: "completed",
     value: "1,000",
   },
-    {
+  {
     date: "2025-10-08 13:16:58",
     entity: "NB LTD",
     assets: "Etherum",
     status: "pending",
     value: "5,000",
   },
-    {
+  {
     date: "2025-10-07 13:16:58",
     entity: "NB LTD",
     assets: "Bitcoin",

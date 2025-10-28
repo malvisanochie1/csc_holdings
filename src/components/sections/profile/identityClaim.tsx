@@ -5,7 +5,7 @@ const identityClaim = () => {
     <>
       <div className="card p-4 pb-16">
         <div className="flex justify-between items-center">
-          <h2 className="text-gray-600 text-[14px] font-bold mb-5 uppercase">
+          <h2 className="text-gray-600 dark:text-gray-200 text-[14px] font-bold mb-5 uppercase">
             {" "}
             Identity Claim
           </h2>
@@ -14,7 +14,7 @@ const identityClaim = () => {
           <div className="flex flex-wrap justify-between items-center">
             <h2
               id="identity"
-              className="text-gray-500 text-base sm:text-lg font-semibold mb-2 "
+              className="text-gray-500 text-base sm:text-base font-semibold mb-2 "
             >
               {" "}
               Proof Of Identity
@@ -29,7 +29,7 @@ const identityClaim = () => {
           <div className="flex flex-wrap justify-between items-center">
             <h2
               id="identity"
-              className="text-gray-500 text-base sm:text-lg font-semibold mb-2 "
+              className="text-gray-500 text-base sm:text-base font-semibold mb-2 "
             >
               {" "}
               Proof Of Address

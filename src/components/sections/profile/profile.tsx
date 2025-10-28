@@ -5,7 +5,7 @@ const profile = () => {
     <>
       <div className="card p-4">
         <div className="text-gray-400 font-medium text-lg mb-3">
-          <h1 className="text-gray-700 text-lg font-semibold mb-2">
+          <h1 className="text-gray-700 dark:text-gray-200 text-lg font-semibold mb-2">
             Profile Information
           </h1>
           <div className="text-[15px] text-gray-500 font-light">

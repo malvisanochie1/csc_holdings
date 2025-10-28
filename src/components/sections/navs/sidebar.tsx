@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { NavKey, navItems } from "../../text/csc";
 import RecoveryPortal from "../recoveryPortal";
-import { ModeToggle } from "@/components/ui/modetoggle";
 interface SidebarProps {
   active?: NavKey;
 }
