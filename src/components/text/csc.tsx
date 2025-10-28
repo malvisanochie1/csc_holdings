@@ -59,7 +59,7 @@ export const account_assets: AccountAssets[] = [
     currency: "Bitcoin",
     amount: 0,
     option: "convert",
-    className: "lg:!col-span-2",
+    className: "!col-span-2",
   },
 ];
 
@@ -94,7 +94,7 @@ export const account_currency: AccountCurrency[] = [
     currency: "Bahraini Dinar",
     amount: 0,
     option: "withdraw",
-    className: "lg:col-span-2",
+    className: "col-span-2",
   },
 ];
 
