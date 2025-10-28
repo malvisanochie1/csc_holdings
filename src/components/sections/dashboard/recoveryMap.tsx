@@ -4,8 +4,8 @@ import { steps } from "@/components/text/csc";
 const RecoveryMap: React.FC = () => {
   return (
     <div className="card p-4 w-full">
-      <div className="text-gray-400 font-medium text-lg mb-3">
-        <h1 className="text-gray-700 text-lg font-semibold mb-2">
+      <div className="text-gray-400 dark:text-gray-600 font-medium text-lg mb-3">
+        <h1 className="text-gray-700 dark:text-gray-500 text-lg font-semibold mb-2">
           Recovery Map Reference
         </h1>
         <div className="text-[15px] text-gray-500">
@@ -27,17 +27,17 @@ const RecoveryMap: React.FC = () => {
                     </div>
                     {idx !== steps.length - 1 && (
                       <div
-                        className="w-px bg-gray-200 mt-2"
+                        className="w-px bg-gray-200 dark:bg-gray-500 mt-2"
                         style={{ height: 40 }}
                       />
                     )}
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="text-gray-700 font-medium mb-1">
+                    <h3 className="text-gray-700 text-sm dark:text-gray-500 font-medium mb-1">
                       {step.title}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-snug">
+                    <p className="text-gray-400 text-xs leading-snug">
                       {step.desc}
                     </p>
                   </div>

@@ -47,7 +47,7 @@ const accountOverview = () => {
                 <h3 className="header-sm pb-1.5 sm:pb-2 md:pb-3 text-center">
                   Current Re-Claimed Funds{" "}
                 </h3>
-                <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 border-0 h-[1px]" />
+                <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 dark:from-gray-800 from dark:via-gray-600 dark:to-gray-800 border-0 h-[1px]" />
                 <p className="header text-center">$ 10,000</p>
               </div>
             </div>
@@ -82,7 +82,7 @@ const accountOverview = () => {
                 <h3 className="text-center text-gray-400 pb-1.5 sm:pb-2 md:pb-3 text-xs">
                   FIAT{" "}
                 </h3>
-                <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 border-0 h-[1px]" />
+                <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 dark:from-gray-800 from dark:via-gray-600 dark:to-gray-800 border-0 h-[1px]" />
                 <p className="header text-center"> $ 0</p>
               </div>
             </div>
