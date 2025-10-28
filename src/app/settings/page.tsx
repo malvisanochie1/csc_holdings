@@ -165,23 +165,6 @@ export default function SettingsPage() {
                 </div>
               </Card>
             </div>
-            <div className="flex gap-3">
-              <Button
-                onClick={handleSave}
-                className="flex-1 md:flex-none bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 px-6 rounded-lg transition-all flex items-center justify-center gap-2"
-              >
-                <Save className="w-4 h-4" />
-                Save Changes
-              </Button>
-              <Button
-                onClick={handleCancel}
-                variant="outline"
-                className="flex-1 md:flex-none border-border text-foreground hover:bg-muted bg-background px-6 rounded-lg flex items-center justify-center gap-2"
-              >
-                <X className="w-4 h-4" />
-                Cancel
-              </Button>
-            </div>
           </div>
         </div>
       </div>
