@@ -25,38 +25,34 @@ export default function Sidebar({ active }: SidebarProps) {
 
   const currentActive = (active ?? inferredActive) as NavKey;
   return (
-    <aside className="w-full h-full overflow-y-auto min-h-screen border-r dark:border-gray-700 border-gray-200 pt-4 flex flex-col pb-2">
+    <aside className="w-full h-screen overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col">
       {/* Upper content */}
-      <div className="flex-1">
-        <Link href="/">
-          <div className="flex flex-col gap-3 mb-4 ps-6 dark:text-gray-300">
-            <Image
-              src="/logo.png"
-              alt="CSC logo"
-              width={60}
-              height={60}
-              className="w-[50px] object-contain"
-            />
-            <div>
-              <div>
-                <h1 className="text-sm font-bold flex items-center flex-nowrap">
-                  CSC ESCROW & SETTLEMENT
-                </h1>
-              </div>
-              <div className="text-sm font-bold">UK LIMITED</div>
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Link href="/" className="pt-6 px-4 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <Image
+                src="/logo.png"
+                alt="CSC logo"
+                width={24}
+                height={24}
+                className="w-6 h-6 object-contain brightness-0 invert"
+              />
+            </div>
+            <div className="text-gray-800 dark:text-white">
+              <h1 className="text-sm font-bold leading-tight">CSC ESCROW</h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400">UK LIMITED</p>
             </div>
           </div>
         </Link>
 
-        <hr className="h-[1px] w-40 mx-auto border-0 bg-gradient-to-r from-[#00000000] via-[#21212166] to-[#00000000]" />
-
-        <nav aria-label="Main navigation" className="space-y-1 px-6 pt-4">
+        <nav aria-label="Main navigation" className="flex-1 overflow-y-auto space-y-1 px-3">
           {navItems.map((item) => {
             const isActive = item.key === currentActive;
-            const linkClass = `flex items-center gap-3 p-3 rounded transition-all duration-150 group ${
+            const linkClass = `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group ${
               isActive
-                ? "bg-white shadow-md ring-1 dark:ring-slate-800 ring-gray-200 dark:bg-slate-800"
-                : "hover:bg-white hover:rounded hover:dark:bg-slate-800 rounded"
+                ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md"
+                : "text-gray-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-800"
             }`;
 
             return (
@@ -66,41 +62,27 @@ export default function Sidebar({ active }: SidebarProps) {
                 className={linkClass}
                 aria-current={isActive ? "page" : undefined}
               >
-                <span
-                  className={`grid place-content-center w-7 h-7 rounded px-2 ${
-                    isActive
-                      ? "nav-blue-bg text-gray-300"
-                      : "bg-white dark:bg-slate-800 shadow nav-blue-text group-hover:bg-white dark:nav-blue-bg"
-                  }`}
-                >
-                  <span
-                    className={`w-5 h-5 ps-0.5 -mb-1 mx-auto ${
-                      isActive ? "" : "opacity-90"
-                    }`}
-                  >
-                    {item.icon}
-                  </span>
+                <span className={`text-lg ${isActive ? "text-white" : "text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400"}`}>
+                  {item.icon}
                 </span>
 
-                <span
-                  className={`text-sm font-medium ${
-                    isActive
-                      ? "text-gray-800 dark:text-gray-500"
-                      : "text-gray-600 dark:text-gray-400"
-                  }`}
-                >
+                <span className={`text-sm font-medium flex-1 ${isActive ? "text-white" : ""}`}>
                   {item.label}
                 </span>
+
+                {isActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+                )}
               </Link>
             );
           })}
-
-          {/* <ModeToggle /> */}
         </nav>
       </div>
 
       {/* Bottom section */}
-      <RecoveryPortal />
+      <div className="flex-shrink-0">
+        <RecoveryPortal />
+      </div>
     </aside>
   );
 }

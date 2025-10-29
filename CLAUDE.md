@@ -1,5 +1,10 @@
 # CLAUDE.md
 
+# NOTE
+You are to employ your best project developement and designing skillset, no shaddy designs, every design must be articulate and perfect
+for every implementation, make sure the color scheme is perfect
+
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
@@ -8,19 +13,25 @@ This is a Next.js 15 application for CSC Escrow & Settlement UK Ltd, a financial
 
 ## Development Commands
 
+**Package Manager**: This project uses `yarn`.
+
 ```bash
 # Start development server (runs on http://localhost:3000)
-npm run dev
+yarn dev
 
 # Build for production
-npm run build
+yarn build
 
 # Start production server
-npm start
+yarn start
 
 # Run linting
-npm run lint
+yarn lint
 ```
+
+**After any implementation**: Always run `yarn build` to ensure the build completes successfully and there are no TypeScript or build errors.
+
+**Build Directory**: Production builds are output to `.next-build/` instead of `.next/` to prevent conflicts with the development server. This allows you to run `yarn build` while `yarn dev` is running without interfering with the dev server.
 
 ## Tech Stack
 

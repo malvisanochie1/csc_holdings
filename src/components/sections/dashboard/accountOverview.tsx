@@ -1,134 +1,120 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MdMoreVert } from "react-icons/md";
-import { MdDiamond } from "react-icons/md";
+import { MdMoreVert, MdDiamond } from "react-icons/md";
+import { BiWallet, BiLineChart } from "react-icons/bi";
 import { Withdraw } from "../withdraw/withdraw";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
 
 const accountOverview = () => {
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-5  gap-4 pb-5  ">
-        <div className="lg:col-span-3 card h-fit pb-2 sm:pb-3">
-          <div className="grid lg:grid-cols-3 gap-4 mt-5 p-4">
-            <div className="py-5 pb-10 ">
-              <h2 className="text-center text-gray-400 font-bold">Hi John,</h2>
-              <h3 className="text-center text-gray-400 pb-1.5 sm:pb-2 md:pb-3">
-                Account ID
-              </h3>
-              <p className="header text-center"> ACMCT3IRDL1</p>
+      {/* Main Stats Row - Desktop */}
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
+        {/* Total Asset Value */}
+        <div className="card p-4 flex flex-col items-center text-center">
+          <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 flex items-center justify-center shadow-md shadow-emerald-500/20 mb-3">
+            <BiLineChart className="text-white text-xl" />
+          </div>
+          <p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 mb-2">Total Asset Value</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">$10,000</h2>
+          <p className="text-[10px] text-emerald-600 dark:text-emerald-400">Re-Claimed Funds</p>
+        </div>
+
+        {/* Available Balance */}
+        <div className="card p-4 flex flex-col items-center text-center relative">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="absolute top-3 right-3 focus:ring-0 focus:outline-none cursor-pointer text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+              <MdMoreVert size={16} />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <Withdraw />
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 flex items-center justify-center shadow-md shadow-blue-500/20 mb-3">
+            <BiWallet className="text-white text-xl" />
+          </div>
+          <p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 mb-2">Available Balance</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">$0</h2>
+          <p className="text-[10px] text-blue-600 dark:text-blue-400">✓ Eligible for Withdrawal</p>
+        </div>
+
+        {/* Award Winning Escrow */}
+        <div className="card p-4 flex flex-col items-center text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-500/5 dark:to-blue-500/5 rounded-full blur-xl"></div>
+
+          <div className="relative flex flex-col items-center">
+            <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-md shadow-purple-500/20 mb-3">
+              <MdDiamond className="text-white text-xl" />
             </div>
-            <div className="py-5 pb-10 shadow-xl dark:shadow-gray-700 shadow-gray-200 card">
-              <div className="min-h-16">
-                {" "}
-                <Image
-                  width="200"
-                  height="200"
-                  src="/dashboard/vaultt.jpg"
-                  alt=""
-                  className="rounded w-16 h-16 mx-auto mb-3"
-                />
-              </div>
-              <div className="flex flex-col space-y-1">
-                <h2 className="text-center text-gray-500 font-bold">
-                  Total Asset Value
-                </h2>
-                <h3 className="header-sm pb-1.5 sm:pb-2 md:pb-3 text-center">
-                  Current Re-Claimed Funds{" "}
-                </h3>
-                <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 dark:from-gray-800 from dark:via-gray-600 dark:to-gray-800 border-0 h-[1px]" />
-                <p className="header text-center">$ 10,000</p>
-              </div>
-            </div>
-            <div className="py-5 pb-10 shadow-xl card">
-              <div className="min-h-16 w-full">
-                <DropdownMenu>
-                  <div className="w-full flex justify-end  focus:rind-0 focus:border-0 focus:outline-none pe-2 md:pe-4 text-gray-600">
-                    <DropdownMenuTrigger className=" focus:rind-0 focus:border-0 focus:outline-none cursor-pointer">
-                      <MdMoreVert />
-                    </DropdownMenuTrigger>
-                  </div>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem>
-                      <div onClick={(e) => e.stopPropagation()} className="p-2">
-                        <Withdraw />
-                      </div>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>{" "}
-                <Image
-                  width="200"
-                  height="200"
-                  src="/dashboard/gift.png"
-                  alt=""
-                  className="rounded w-12 mx-auto mb-3"
-                />
-              </div>
-              <div className="flex flex-col space-y-1">
-                <h2 className="text-center text-gray-500 font-bold text-sm">
-                  Av. BAL IN FIAT{" "}
-                </h2>
-                <h3 className="text-center text-gray-400 pb-1.5 sm:pb-2 md:pb-3 text-xs">
-                  FIAT{" "}
-                </h3>
-                <hr className="w-7/12 mx-auto bg-gradient-to-r from-gray-50 from via-gray-400 to-gray-50 dark:from-gray-800 from dark:via-gray-600 dark:to-gray-800 border-0 h-[1px]" />
-                <p className="header text-center"> $ 0</p>
-              </div>
-            </div>
+            <p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 mb-2">Award Winning</p>
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Escrow Services</h2>
+            <p className="text-[10px] text-gray-600 dark:text-gray-300">Secure • Transparent</p>
           </div>
         </div>
-        <div className="lg:col-span-2 card p-2 sm:p-4">
-          <div className="p-2 sm:p-5 bg-gradient-to-br from-[#5FC2C1] to-[#676DD3] dark:from-[#5fc2c072] dark:to-[#676DD374] card  dark:text-gray-300 text-white flex flex-col space-y-2 sm:space-y-3 w-full">
-            <Disclosure as="div" className="w-full">
-              <DisclosureButton className="w-full">
-                <h1 className="text-lg sm:text-xl md:text-2xl font-bold flex items-start w-full md:text-center">
-                  <span className="p-1 pb-2 rounded-md  dark:bg-gray-300 bg-white w-7 sm:w-9 h-7 sm:h-9 flex justify-center me-2 text-gray-600">
-                    <MdDiamond />
-                  </span>{" "}
-                  Award Winning Escrow Services
-                </h1>
+      </div>
 
-                {/* <IoChevronDown className="size-5 fill-white/60 group-data-hover:fill-white/50 group-data-open:rotate-180" /> */}
-              </DisclosureButton>
-              <DisclosurePanel className="">
-                <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
-                  Your funds re-claim and recovery journey is very important to
-                  us. Trust us to put your priorities first in getting back your
-                  money.
-                </p>
-                <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
-                  NOTE: YOU ARE ELIGIBLE FOR THE FIAT WITHDRAWAL.
-                </p>{" "}
-              </DisclosurePanel>
-            </Disclosure>
+      {/* Main Stats Row - Mobile (Compact) */}
+      <div className="sm:hidden grid grid-cols-2 gap-3 pb-4">
+        {/* Total Asset Value */}
+        <div className="card p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-sm shadow-emerald-500/20">
+              <BiLineChart className="text-white text-sm" />
+            </div>
+            <p className="text-[9px] font-medium text-gray-500 dark:text-gray-400">Total Assets</p>
+          </div>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-0.5">$10,000</h2>
+          <p className="text-[9px] text-emerald-600 dark:text-emerald-400">Re-Claimed</p>
+        </div>
 
-            {/* <h1 className="text-lg sm:text-xl md:text-2xl font-bold flex items-center">
-              <span className="p-1 pb-2 rounded-md  dark:bg-gray-300 bg-white w-7 sm:w-9 h-7 sm:h-9 flex justify-center me-2 text-gray-600">
-                <MdDiamond />
-              </span>{" "}
-              Award Winning Escrow
-            </h1>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold pb-2">
-              Services
-            </h2>
-            <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
-              Your funds re-claim and recovery journey is very important to us.
-              Trust us to put your priorities first in getting back your money.
-            </p>
-            <p className="dark:text-gray-400 text-gray-200 font-[400] leading-snug">
-              NOTE: YOU ARE ELIGIBLE FOR THE FIAT WITHDRAWAL.
-            </p> */}
+        {/* Available Balance */}
+        <div className="card p-3 relative">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="absolute top-2 right-2 focus:ring-0 focus:outline-none cursor-pointer text-gray-400 dark:text-gray-500">
+              <MdMoreVert size={14} />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <Withdraw />
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm shadow-blue-500/20">
+              <BiWallet className="text-white text-sm" />
+            </div>
+            <p className="text-[9px] font-medium text-gray-500 dark:text-gray-400">Available</p>
+          </div>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-0.5">$0</h2>
+          <p className="text-[9px] text-blue-600 dark:text-blue-400">✓ Withdraw</p>
+        </div>
+
+        {/* Award Winning Escrow - Full Width on Mobile */}
+        <div className="card p-3 col-span-2 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-500/5 dark:to-blue-500/5 rounded-full blur-xl"></div>
+
+          <div className="relative flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-sm shadow-purple-500/20">
+              <MdDiamond className="text-white text-sm" />
+            </div>
+            <div>
+              <p className="text-[9px] font-medium text-gray-500 dark:text-gray-400">Award Winning</p>
+              <h2 className="text-sm font-bold text-gray-900 dark:text-white">Escrow Services</h2>
+            </div>
+            <p className="text-[9px] text-gray-600 dark:text-gray-300 ml-auto">Secure • Transparent</p>
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@ interface AccountAssets {
   amount: number;
   option: string;
   className?: string;
+  percentageChange?: number;
 }
 interface AccountCurrency {
   img: string;
@@ -27,6 +28,7 @@ interface AccountCurrency {
   amount: number;
   option: string;
   className?: string;
+  percentageChange?: number;
 }
 export const account_assets: AccountAssets[] = [
   {
@@ -34,32 +36,35 @@ export const account_assets: AccountAssets[] = [
     currency: "Gold",
     amount: 10000,
     option: "convert",
+    percentageChange: 0.49,
   },
   {
     img: "/dashboard/account_overview/solana.png",
     currency: "Solana",
     amount: 0,
     option: "convert",
+    percentageChange: -1.23,
   },
   {
     img: "/dashboard/account_overview/XRP.png",
     currency: "XRP",
     amount: 0,
     option: "convert",
+    percentageChange: 2.15,
   },
   {
     img: "/dashboard/account_overview/Etherum.png",
-    currency: "Etherum",
+    currency: "Ethereum",
     amount: 0,
     option: "convert",
-    className: "lg:!col-span-2",
+    percentageChange: -1.03,
   },
   {
     img: "/dashboard/account_overview/btc.png",
     currency: "Bitcoin",
     amount: 0,
     option: "convert",
-    className: "!col-span-2",
+    percentageChange: -0.49,
   },
 ];
 
@@ -69,32 +74,35 @@ export const account_currency: AccountCurrency[] = [
     currency: "USD",
     amount: 0,
     option: "withdraw",
+    percentageChange: 0,
   },
   {
     img: "/dashboard/account_overview/euro.png",
     currency: "Euro",
     amount: 0,
     option: "withdraw",
+    percentageChange: 0,
   },
   {
     img: "/dashboard/account_overview/pound-sterling.png",
     currency: "Pounds",
     amount: 0,
     option: "withdraw",
+    percentageChange: 0,
   },
   {
     img: "/dashboard/account_overview/yen.png",
     currency: "Yen",
     amount: 0,
     option: "withdraw",
-    className: "lg:col-span-2",
+    percentageChange: 0,
   },
   {
     img: "/dashboard/account_overview/Bahraini.png",
     currency: "Bahraini Dinar",
     amount: 0,
     option: "withdraw",
-    className: "col-span-2",
+    percentageChange: 0,
   },
 ];
 

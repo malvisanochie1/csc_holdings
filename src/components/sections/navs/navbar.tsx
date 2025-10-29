@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <section className="w-full">
-      <header className="w-full border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 hidden sm:flex xl:hidden">
+      <header className="w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden sm:flex xl:hidden sticky top-0 z-50 shadow-sm">
         <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div>
             <div className="flex items-center justify-between h-16">
@@ -115,38 +115,39 @@ export default function Navbar() {
           </div>
         </div>
       </header>
-      {/* mobile nave */}
+      {/* Mobile Bottom Navigation */}
       <div
-        className="fixed inset-x-0 bottom-0 px-2 pt-3 pb-5 bg-white dark:bg-gray-800 z-50 hover:nav-blue-bg hover:text-white nav-blue-text sm:hidden"
+        className="fixed inset-x-0 bottom-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 z-50 sm:hidden shadow-[0_-4px_12px_-2px_rgba(0,0,0,0.15)]"
         style={{
           paddingBottom: "env(safe-area-inset-bottom)",
         }}
       >
-        <ul className="flex items-baseline justify-between pb-2">
-          {navItems.map((user) => {
-            const isActive = user.key === inferredActive;
+        <ul className="flex items-center justify-around px-3 py-3">
+          {navItems.slice(0, 5).map((item) => {
+            const isActive = item.key === inferredActive;
             return (
-              <li key={user.key}>
-                <Link href={user.href}>
-                  <span
-                    className={`mx-auto  ${
+              <li key={item.key} className="flex-1">
+                <Link href={item.href} className="flex flex-col items-center gap-1.5 py-1">
+                  <div className={`flex items-center justify-center w-14 h-12 rounded-2xl transition-all duration-300 ${
+                    isActive
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg shadow-blue-500/30 scale-105"
+                      : "bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800"
+                  }`}>
+                    <span className={`text-2xl ${
                       isActive
-                        ? "text-[#3E2BCE]/50 dark:text-gray-300"
-                        : "dark:text-gray-500"
-                    }`}
-                  >
-                    {user.icon}{" "}
-                  </span>
-                  <div
-                    className={`text-center text-[10px] sm:text-sm  ${
-                      isActive
-                        ? "text-[#3E2BCE]/50 dark:text-gray-300"
-                        : "dark:text-gray-500"
-                    }`}
-                  >
-                    {" "}
-                    {user.label}
+                        ? "text-white"
+                        : "text-gray-500 dark:text-gray-400"
+                    }`}>
+                      {item.icon}
+                    </span>
                   </div>
+                  <span className={`text-[11px] font-medium transition-colors ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-500 dark:text-gray-400"
+                  }`}>
+                    {item.label}
+                  </span>
                 </Link>
               </li>
             );

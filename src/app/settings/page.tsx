@@ -39,11 +39,12 @@ export default function SettingsPage() {
   return (
     <>
       <Navbar />
-      <div className="flex home-bg lg:max-h-screen overflow-y-hidden w-full mb-10">
-        <div className="max-w-[240px] w-full hidden xl:flex">
+      <div className="flex home-bg h-screen overflow-hidden">
+        <div className="max-w-[240px] w-full hidden xl:flex flex-shrink-0">
           <Sidebar />
         </div>
-        <div className="bg-background p-6 md:p-8 w-full overflow-y-auto">
+        <div className="w-full flex flex-col overflow-hidden">
+          <div className="flex-1 px-6 md:px-8 pb-24 sm:pb-8 overflow-y-auto">
           <div className="max-w-3xl mx-auto ">
             <div className="mb-8">
               <h1 className="text-3xl font-bold text-foreground mb-2">
@@ -165,6 +166,7 @@ export default function SettingsPage() {
                 </div>
               </Card>
             </div>
+          </div>
           </div>
         </div>
       </div>
