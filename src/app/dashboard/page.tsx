@@ -13,7 +13,7 @@ const page = () => {
       {/*<Navbar />*/}
       <div className="flex home-bg lg:h-screen">
         <div className="max-w-[240px] w-full hidden xl:flex">
-          <Sidebar />
+          {/*<Sidebar />*/}
         </div>
         <div className="w-full">
           <div className="flex-1 p-3 sm:p-5 h-full overflow-y-auto">
