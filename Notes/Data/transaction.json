@@ -1,0 +1,192 @@
+{
+  "status": "success",
+  "message": "Wallet transactions retrieved successfully",
+  "data": {
+    "total_amount": 3455,
+    "groups": {
+      "success": {
+        "count": 2,
+        "wallet_ids": [
+          "a04c8abc-04bc-4353-b408-668d4d22ee92",
+          "a04c8abc-0478-4ecf-b6dc-c15448af5039"
+        ],
+        "total": 2000,
+        "transactions": [
+          {
+            "id": "a05524f4-e46a-4583-a651-1996d92c6ed7",
+            "wallet_id": "a04c8abc-04bc-4353-b408-668d4d22ee92",
+            "wallet": {
+              "id": "a04c8abc-04bc-4353-b408-668d4d22ee92",
+              "name": "XRP",
+              "symbol": "✕",
+              "image": "http://csc.test/default/wallets/XRP.png",
+              "is_fiat": false
+            },
+            "amount": 1000,
+            "status": "completed",
+            "color": "green",
+            "type": "credit",
+            "description": null,
+            "company": "Snow and Keller Traders",
+            "created_at": "2025-11-11T16:38:46+01:00"
+          },
+          {
+            "id": "a054f31f-4361-4b2e-ac1e-978523283b5a",
+            "wallet_id": "a04c8abc-0478-4ecf-b6dc-c15448af5039",
+            "wallet": {
+              "id": "a04c8abc-0478-4ecf-b6dc-c15448af5039",
+              "name": "Solana",
+              "symbol": "◎",
+              "image": "http://csc.test/default/wallets/solana.png",
+              "is_fiat": false
+            },
+            "amount": 1000,
+            "status": "completed",
+            "color": "green",
+            "type": "credit",
+            "description": null,
+            "company": "Sullivan and Michael Inc",
+            "created_at": "2025-11-11T14:19:26+01:00"
+          }
+        ]
+      },
+      "pending": {
+        "count": 0,
+        "wallet_ids": [],
+        "total": 0,
+        "transactions": []
+      },
+      "failed": {
+        "count": 2,
+        "wallet_ids": [
+          "a04c8abc-0478-4ecf-b6dc-c15448af5039"
+        ],
+        "total": 1455,
+        "transactions": [
+          {
+            "id": "a055257d-d4ce-4b72-b589-a1e1dad9d07e",
+            "wallet_id": "a04c8abc-0478-4ecf-b6dc-c15448af5039",
+            "wallet": {
+              "id": "a04c8abc-0478-4ecf-b6dc-c15448af5039",
+              "name": "Solana",
+              "symbol": "◎",
+              "image": "http://csc.test/default/wallets/solana.png",
+              "is_fiat": false
+            },
+            "amount": 455,
+            "status": "failed",
+            "color": "red",
+            "type": "credit",
+            "description": null,
+            "company": "Snow and Keller Traders",
+            "created_at": "2025-11-11T16:40:16+01:00"
+          },
+          {
+            "id": "a0552557-fd34-4a35-9e9f-41989f9a82b5",
+            "wallet_id": "a04c8abc-0478-4ecf-b6dc-c15448af5039",
+            "wallet": {
+              "id": "a04c8abc-0478-4ecf-b6dc-c15448af5039",
+              "name": "Solana",
+              "symbol": "◎",
+              "image": "http://csc.test/default/wallets/solana.png",
+              "is_fiat": false
+            },
+            "amount": 1000,
+            "status": "failed",
+            "color": "red",
+            "type": "credit",
+            "description": null,
+            "company": "1000",
+            "created_at": "2025-11-11T16:39:51+01:00"
+          }
+        ]
+      }
+    },
+    "graph": [
+      {
+        "date": "2025-10-29",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-10-30",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-10-31",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-01",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-02",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-03",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-04",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-05",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-06",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-07",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-08",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-09",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-10",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-11",
+        "success": 2000,
+        "pending": 0,
+        "failed": 1455
+      }
+    ]
+  }
+}

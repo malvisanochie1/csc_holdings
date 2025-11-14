@@ -5,7 +5,7 @@ import Image from "next/image";
 import FlowModal from "@/components/modals/flow/flowModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Field, FieldLabel } from "@/components/ui/field";
+import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import {
   withdrawalMethodTabs,
   withdrawalCryptoOptions,
@@ -40,6 +40,7 @@ export function Withdraw({
     withdrawalCryptoOptions[0]?.id ?? "bitcoin"
   );
   const [cryptoForm, setCryptoForm] = React.useState({ walletAddress: "" });
+  const [walletAddressError, setWalletAddressError] = React.useState<string | null>(null);
   const [bankForm, setBankForm] = React.useState({
     accountName: "",
     accountNumber: "",
@@ -75,6 +76,7 @@ export function Withdraw({
   const resetForms = () => {
     setCryptoForm({ walletAddress: "" });
     setBankForm({ accountName: "", accountNumber: "", iban: "", bankName: "", swift: "", notes: "" });
+    setWalletAddressError(null);
   };
 
   const handleClose = (next: boolean) => {
@@ -111,7 +113,7 @@ export function Withdraw({
 
       if (method === "crypto") {
         if (!cryptoForm.walletAddress.trim()) {
-          showToast({ type: "error", title: "Wallet address is required" });
+          setWalletAddressError("Wallet address is required");
           return;
         }
         payload.network = selectedCrypto?.network;
@@ -135,16 +137,21 @@ export function Withdraw({
       showToast({ type: "success", title: successMessage });
       handleClose(false);
     } catch (error) {
-      const apiError = error as Error & { error?: string };
+      const apiError = error as Error & { error?: string; errors?: Record<string, string[]> };
       const description =
         apiError?.error && apiError.error !== apiError.message
           ? apiError.error
           : undefined;
-      showToast({
-        type: "error",
-        title: apiError?.message || "Unable to submit withdrawal",
-        description,
-      });
+
+      if (apiError.errors?.wallet_address) {
+        setWalletAddressError(apiError.errors.wallet_address[0]);
+      } else {
+        showToast({
+          type: "error",
+          title: apiError?.message || "Unable to submit withdrawal",
+          description,
+        });
+      }
     }
   };
 
@@ -204,12 +211,16 @@ export function Withdraw({
         <FieldLabel>Wallet address</FieldLabel>
         <Input
           value={cryptoForm.walletAddress}
-          onChange={(event) =>
-            setCryptoForm((prev) => ({ ...prev, walletAddress: event.target.value }))
-          }
+          onChange={(event) => {
+            setCryptoForm((prev) => ({ ...prev, walletAddress: event.target.value }));
+            if (walletAddressError) {
+              setWalletAddressError(null);
+            }
+          }}
           placeholder="Enter BTC/crypto wallet address"
           className="h-12 rounded-xl"
         />
+        {walletAddressError && <FieldError>{walletAddressError}</FieldError>}
       </Field>
     </div>
   );

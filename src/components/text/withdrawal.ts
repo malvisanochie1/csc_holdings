@@ -119,7 +119,7 @@ const STAGE_BASE_COPY: Record<WithdrawalStage, WithdrawalStageCopy> = {
     eyebrow: "Security",
     title: "Fund transfer pin required",
     lead: "To protect you against unauthorized withdrawals, a Funds Transfer Pin has been sent to your email.",
-    description: "Insert the pin to proceed with your withdrawal request.",
+    // description: "Insert the pin to proceed with your withdrawal request.",
     pinLabel: "Transfer pin",
     progress: 20,
   },

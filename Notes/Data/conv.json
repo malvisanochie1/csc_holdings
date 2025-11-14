@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "message": "Conversion request submitted successfully",
+  "data": {
+    "conversion_request": {
+      "id": "a057532b-7356-4809-a7c8-b8287da06136",
+      "user_id": "a055858f-bba9-4467-890b-808bace3d23c",
+      "from_wallet_id": "a0558552-d6ef-4c1a-820b-7224f4aaab3d",
+      "to_wallet_id": "a0558552-d79d-4736-8633-b649c467995c",
+      "status": "pending",
+      "step": 1,
+      "amount": 1000,
+      "converted_amount": 0,
+      "percent": 0,
+      "transfer_method": "Crypto Transfer",
+      "paid": false,
+      "data": []
+    }
+  }
+}

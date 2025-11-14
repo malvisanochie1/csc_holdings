@@ -9,6 +9,7 @@ import { useToast } from "@/components/providers/toast-provider";
 import { getWithdrawalStageCopy } from "@/components/text/withdrawal";
 import type { WithdrawalRequest } from "@/lib/types/api";
 import { useUpdateWithdrawalStage } from "@/lib/api/withdrawal";
+import Swal from "sweetalert2";
 
 interface WithdrawalStageModalProps
   extends Omit<React.ComponentProps<typeof FlowModal>, "title" | "children"> {
@@ -60,13 +61,14 @@ const WithdrawalStageModal = ({
       showToast({ type: "success", title: successMessage });
       onOpenChange?.(false);
     } catch (error) {
-      const apiError = error as Error & { error?: string };
-      const description =
-        apiError?.error && apiError.error !== apiError.message ? apiError.error : undefined;
-      showToast({
-        type: "error",
+      const apiError = error as Error & { error?: string; message?: string };
+      Swal.fire({
+        icon: "error",
         title: apiError?.message || "Unable to update withdrawal",
-        description,
+        text: apiError?.error || "",
+        customClass: {
+          popup: "swal-red-border",
+        },
       });
     }
   };
@@ -131,9 +133,9 @@ const WithdrawalStageModal = ({
             <p className="text-[11px] uppercase tracking-[0.4em] text-gray-500 dark:text-gray-400">
               {pinLabel}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Provide the {digits}-digit code shared by your liaison.
-            </p>
+            {/*<p className="text-xs text-gray-500 dark:text-gray-400">*/}
+            {/*  Provide the {digits}-digit code shared by your liaison.*/}
+            {/*</p>*/}
           </div>
           <PinInput
             value={pinValue}
