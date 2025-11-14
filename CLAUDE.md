@@ -11,6 +11,57 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Next.js 15 application for CSC Escrow & Settlement UK Ltd, a financial recovery and asset management platform. The app enables users to track recovered assets (cryptocurrencies and precious metals), view transaction history, manage their profile, and process withdrawals.
 
+
+
+
+## CRITICAL: Notes/DEV Task Management (MUST FOLLOW)
+
+### Structure for EVERY Task:
+```
+Notes/DEV/{task-name}/
+├── TASK.md           (Checklist - create at START)
+└── IMPLEMENTATION.md (Backend API docs - create at END)
+```
+
+### Workflow:
+
+**1. START** → Create folder + TASK.md with checkboxes
+```markdown
+# Task Name
+## Tasks
+- [ ] Item 1
+- [ ] Item 2
+```
+
+**2. DURING** → Update TASK.md checkboxes as you complete items
+
+**3. END** → Create IMPLEMENTATION.md when ALL tasks done:
+```markdown
+# Feature Name Implementation
+
+## Date
+YYYY-MM-DD
+
+## Summary
+One paragraph.
+
+**4. COMPLETE** → Move to `Notes/DEV/completed/{task-name}/`
+
+**5. RECORD** → Add one line to `Notes/DEV/TASKS.md`:
+```
+- [x] Task Name - Brief description (YYYY-MM-DD)
+```
+
+### Rules:
+- ✅ Folder per task | TASK.md at start | IMPLEMENTATION.md at end
+- ❌ NO loose .md files in Notes/DEV/
+
+### On New Session:
+Check `Notes/DEV/` for unfinished tasks first
+
+
+
+
 ## Development Commands
 
 **Package Manager**: This project uses `yarn`.

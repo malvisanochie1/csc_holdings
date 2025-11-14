@@ -1,26 +1,35 @@
 "use client";
 import React from "react";
-import { account_assets, account_currency } from "@/components/text/csc";
 import { FaArrowDownLong } from "react-icons/fa6";
 import FinancialAssetsMobile from "./financialAssetsMobile";
 import AssetCard from "./assetCard";
+import { useAuthStore } from "@/lib/store/auth";
 
-const financialAssets = () => {
+const FinancialAssets = () => {
+  const { user } = useAuthStore();
+
+  // Get user's assets (crypto/precious metals) and currencies (fiat)
+  const userAssets = user?.assets || [];
+  const userCurrencies = user?.currencies || [];
+
   return (
     <>
       <div className="sm:flex flex-col hidden">
         {/* Crypto Assets */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-          {account_assets.map((item, idx) => (
+          {userAssets.map((asset) => (
             <AssetCard
-              key={idx}
-              img={item.img}
-              currency={item.currency}
-              amount={item.amount}
-              option={item.option}
-              percentageChange={item.percentageChange}
+              key={asset.id}
+              img={asset.image}
+              currency={asset.name}
+              amount={asset.balance}
+              option={asset.symbol}
+              actionType="convert"
+              walletId={asset.id}
+              userWalletId={asset.user_wallet_id}
+              percentageChange={0} // API doesn't provide this, could be calculated
               showPercentage={true}
-              className={item.className}
+              className="" // Default styling
             />
           ))}
         </div>
@@ -40,15 +49,18 @@ const financialAssets = () => {
 
         {/* Fiat Currencies */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-          {account_currency.map((item, idx) => (
+          {userCurrencies.map((currency) => (
             <AssetCard
-              key={idx}
-              img={item.img}
-              currency={item.currency}
-              amount={item.amount}
-              option={item.option}
+              key={currency.id}
+              img={currency.image}
+              currency={currency.name}
+              amount={typeof currency.balance === "number" ? currency.balance : 0}
+              option={currency.symbol}
+              actionType="withdraw"
+              walletId={currency.id}
+              userWalletId={currency.user_wallet_id}
               showPercentage={false}
-              className={item.className}
+              className="" // Default styling
             />
           ))}
         </div>
@@ -58,4 +70,4 @@ const financialAssets = () => {
   );
 };
 
-export default financialAssets;
+export default FinancialAssets;

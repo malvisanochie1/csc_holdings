@@ -1,47 +1,34 @@
-import React from "react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+"use client";
 
-interface InsufficientBalanceProps {
-  triggerText?: string;
+import React from "react";
+import Swal from "sweetalert2";
+
+export interface InsufficientBalanceOptions {
+  title?: string;
+  description?: string;
 }
 
-const insufficientBalance = ({
-  triggerText = "withdraw",
-}: InsufficientBalanceProps) => {
-  return (
-    <div>
-      <AlertDialog>
-        <AlertDialogTrigger>{triggerText} </AlertDialogTrigger>
-        <AlertDialogContent>
-          <div
-            role="alert"
-            aria-live="assertive"
-            className="w-full flex flex-col space-y-6"
-          >
-            <div className="mx-auto w-20 h-20 rounded-full border-4 border-[#F8BB86] flex items-center justify-center mb-6">
-              <span className="text-[#F8BB86] text-4xl font-bold leading-none">
-                !
-              </span>
-            </div>
+export function showInsufficientBalanceAlert(options?: InsufficientBalanceOptions) {
+  const title = options?.title ?? "Insufficient Balance";
+  const description = options?.description ?? "Wait for incoming reclaims to begin conversion.";
 
-            <p className="text-white text-lg sm:text-2xl ms:text-3xl font-semibold">
-              Sorry, balance is insufficient.
-            </p>
-            <div className="flex w-ful justify-end">
-              <AlertDialogAction className="right-6 bottom-6 bg-red-500 hover:bg-red-500 cursor-pointer text-white px-6  py-2 text-sm rounded shadow-sm">
-                ok
-              </AlertDialogAction>
-            </div>
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+  return Swal.fire({
+    title,
+    text: description,
+    icon: "error",
+    confirmButtonText: "Understood",
+    confirmButtonColor: "#d33",
+    backdrop: true,
+    customClass: {
+      popup: "swal-red-border",
+    },
+  });
+}
+
+export function useInsufficientBalanceAlert(defaults?: InsufficientBalanceOptions) {
+  return React.useCallback(
+    (overrides?: InsufficientBalanceOptions) =>
+      showInsufficientBalanceAlert({ ...(defaults ?? {}), ...(overrides ?? {}) }),
+    [defaults]
   );
-};
-
-export default insufficientBalance;
+}

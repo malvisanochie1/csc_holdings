@@ -3,14 +3,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 import { NavKey, navItems } from "../../text/csc";
+import { useLogout } from "@/lib/api/auth";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const menuRef = React.useRef<HTMLDivElement | null>(null);
+  const { mutate: triggerLogout, isPending: isLoggingOut } = useLogout();
 
   React.useEffect(() => {
     setOpen(false);
@@ -36,9 +39,19 @@ export default function Navbar() {
     return "notifications";
   }, [pathname]);
 
+  const handleLogout = React.useCallback(() => {
+    triggerLogout(undefined, {
+      onSettled: () => {
+        router.push("/login");
+      },
+    });
+  }, [router, triggerLogout]);
+
   const renderNavLinks = (isMobile = false) =>
     navItems.map((item) => {
-      const isActive = item.key === inferredActive;
+      const isLogoutItem = item.key === "logout";
+      const isActive = !isLogoutItem && item.key === inferredActive;
+      const label = isLogoutItem && isLoggingOut ? "Logging out..." : item.label;
       const commonClasses =
         "text-sm font-medium transition-colors duration-150";
       const desktopClasses = isActive
@@ -47,6 +60,25 @@ export default function Navbar() {
       const mobileClasses = isActive
         ? "bg-white text-gray-900 dark:bg-gray-600 dark:text-gray-300"
         : "text-gray-600- hover:bg-gray-50 text-gray-900 dark:hover:bg-gray-600 dark:text-gray-300";
+
+      if (isLogoutItem) {
+        return (
+          <button
+            key={item.key}
+            type="button"
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className={
+              isMobile
+                ? `block px-3 py-2 rounded-md mx-1 ${mobileClasses} ${commonClasses} disabled:opacity-60 disabled:cursor-not-allowed`
+                : `${desktopClasses} ${commonClasses} disabled:opacity-60 disabled:cursor-not-allowed`
+            }
+          >
+            {label}
+          </button>
+        );
+      }
+
       return (
         <Link
           key={item.key}
@@ -58,7 +90,7 @@ export default function Navbar() {
           }
           aria-current={isActive ? "page" : undefined}
         >
-          {item.label}
+          {label}
         </Link>
       );
     });
