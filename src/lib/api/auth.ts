@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { apiGet, apiPost, apiPut } from "@/lib/api/http";
+import { apiGet, apiPost } from "@/lib/api/http";
 import type {
   AuthPayloadLogin,
   AuthPayloadRegister,
@@ -30,7 +30,7 @@ export function getCurrentUser() {
 }
 
 export function updateProfile(payload: UpdateProfilePayload) {
-  return apiPut<UserResource, UpdateProfilePayload>("/user/profile", payload);
+  return apiPost<UserResource, UpdateProfilePayload>("/update", payload);
 }
 
 export function logout() {

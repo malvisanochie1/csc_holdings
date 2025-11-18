@@ -1,0 +1,291 @@
+{
+  "status": "success",
+  "message": "site data retrieved",
+  "data": {
+    "status": "active",
+    "name": "CSC Holdings",
+    "title": "CSC Holdings",
+    "must_verify_account": false,
+    "contactEmail": null,
+    "website_url": null,
+    "favicon": null,
+    "logo": "",
+    "currencies": [
+      {
+        "id": 6,
+        "name": "Australian Dollar",
+        "symbol": "A$",
+        "code": "AUD",
+        "rate": 1.53,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 16,
+        "name": "Brazilian Real",
+        "symbol": "R$",
+        "code": "BRL",
+        "rate": 5.3,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 3,
+        "name": "British Pound",
+        "symbol": "£",
+        "code": "GBP",
+        "rate": 0.76,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 5,
+        "name": "Canadian Dollar",
+        "symbol": "C$",
+        "code": "CAD",
+        "rate": 1.4,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 8,
+        "name": "Chinese Yuan",
+        "symbol": "¥",
+        "code": "CNY",
+        "rate": 7.1,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 2,
+        "name": "Euro",
+        "symbol": "€",
+        "code": "EUR",
+        "rate": 0.86,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 13,
+        "name": "Hong Kong Dollar",
+        "symbol": "HK$",
+        "code": "HKD",
+        "rate": 7.77,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 14,
+        "name": "Indian Rupee",
+        "symbol": "₹",
+        "code": "INR",
+        "rate": 88.69,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 4,
+        "name": "Japanese Yen",
+        "symbol": "¥",
+        "code": "JPY",
+        "rate": 154.55,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 17,
+        "name": "Mexican Peso",
+        "symbol": "$",
+        "code": "MXN",
+        "rate": 18.32,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 9,
+        "name": "New Zealand Dollar",
+        "symbol": "NZ$",
+        "code": "NZD",
+        "rate": 1.76,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 22,
+        "name": "Nigerian Naira",
+        "symbol": "₦",
+        "code": "NGN",
+        "rate": 1440.78,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 11,
+        "name": "Norwegian Krone",
+        "symbol": "kr",
+        "code": "NOK",
+        "rate": 10.09,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 18,
+        "name": "Russian Ruble",
+        "symbol": "₽",
+        "code": "RUB",
+        "rate": 80.84,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 12,
+        "name": "Singapore Dollar",
+        "symbol": "S$",
+        "code": "SGD",
+        "rate": 1.3,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 15,
+        "name": "South African Rand",
+        "symbol": "R",
+        "code": "ZAR",
+        "rate": 17.08,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 20,
+        "name": "South Korean Won",
+        "symbol": "₩",
+        "code": "KRW",
+        "rate": 1449.5,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 10,
+        "name": "Swedish Krona",
+        "symbol": "kr",
+        "code": "SEK",
+        "rate": 9.45,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 7,
+        "name": "Swiss Franc",
+        "symbol": "CHF",
+        "code": "CHF",
+        "rate": 0.79,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 19,
+        "name": "Turkish Lira",
+        "symbol": "₺",
+        "code": "TRY",
+        "rate": 42.17,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 21,
+        "name": "United Arab Emirates Dirham",
+        "symbol": "د.إ",
+        "code": "AED",
+        "rate": 3.67,
+        "icon": null,
+        "is_default": false
+      },
+      {
+        "id": 1,
+        "name": "US Dollar",
+        "symbol": "$",
+        "code": "USD",
+        "rate": 1,
+        "icon": null,
+        "is_default": true
+      }
+    ],
+    "wallets": [
+      {
+        "id": "a05b5306-5214-405f-a126-4a593aa392d0",
+        "name": "Gold",
+        "symbol": "Au",
+        "image": "http://csc.test/default/wallets/gold.png",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.10",
+          "max": "0.50"
+        },
+        "active": 1,
+        "crypto_network": null,
+        "address": null,
+        "status": null
+      },
+      {
+        "id": "a05b5306-53d3-48c4-95d7-19c6f014ba52",
+        "name": "Solana",
+        "symbol": "◎",
+        "image": "http://csc.test/default/wallets/solana.png",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.05",
+          "max": "0.30"
+        },
+        "active": 1,
+        "crypto_network": null,
+        "address": null,
+        "status": null
+      },
+      {
+        "id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+        "name": "XRP",
+        "symbol": "✕",
+        "image": "http://csc.test/default/wallets/XRP.png",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.05",
+          "max": "0.25"
+        },
+        "active": 1,
+        "crypto_network": null,
+        "address": null,
+        "status": null
+      },
+      {
+        "id": "a05b5306-5412-475c-a9cf-ad1f9ac231db",
+        "name": "Ethereum",
+        "symbol": "Ξ",
+        "image": "http://csc.test/default/wallets/Etherum.png",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.10",
+          "max": "0.40"
+        },
+        "active": 1,
+        "crypto_network": null,
+        "address": null,
+        "status": null
+      },
+      {
+        "id": "a05b5306-542d-400a-9b08-57161b8efd66",
+        "name": "Bitcoin",
+        "symbol": "₿",
+        "image": "http://csc.test/default/wallets/btc.png",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.10",
+          "max": "0.50"
+        },
+        "active": 1,
+        "crypto_network": null,
+        "address": null,
+        "status": null
+      }
+    ]
+  }
+}

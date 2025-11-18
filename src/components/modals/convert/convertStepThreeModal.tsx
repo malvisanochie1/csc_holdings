@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUpdateConversionRequest } from "@/lib/api/conversion";
 import type { PaymentWallet } from "@/lib/types/api";
-import { formatUsdAmount } from "@/lib/wallets";
+import { formatUserCurrency } from "@/lib/currency";
+import { useAuthStore } from "@/lib/store/auth";
 import { cn } from "@/lib/utils";
 import ConversionSuccessModal from "@/components/modals/convert/conversionSuccessModal";
 
@@ -40,6 +41,7 @@ const ConvertStepThreeModal = ({
   trigger,
   ...flowModalProps
 }: ConvertStepThreeModalProps) => {
+  const { user } = useAuthStore();
   const { showToast } = useToast();
   const {
     mutateAsync: updateConversion,
@@ -52,7 +54,7 @@ const ConvertStepThreeModal = ({
 
   const walletAddress = paymentWallet?.wallet ?? "";
   const qrImage = paymentWallet?.image ?? "/logo.png";
-  const formattedAmount = formatUsdAmount(paidAmount ?? 0);
+  const formattedAmount = formatUserCurrency(typeof paidAmount === 'string' ? parseFloat(paidAmount) || 0 : paidAmount ?? 0, user).displayValue;
 
   const handleCopy = async () => {
     if (!walletAddress) return;

@@ -5,13 +5,18 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { TbLogout2 } from "react-icons/tb";
 import { IoSettings } from "react-icons/io5";
+import { HiOutlineHome } from "react-icons/hi";
+import { BiMessageSquareDetail } from "react-icons/bi";
+import { MdVerifiedUser } from "react-icons/md";
 
 export type NavKey =
   | "dashboard"
   | "profile"
   | "transactions"
-  | "notifications"
+  | "verification"
   | "settings"
+  | "notifications"
+  | "livechat"
   | "logout";
 
 interface AccountAssets {
@@ -145,7 +150,8 @@ export const steps = [
   },
 ];
 
-export const navItems = [
+// Desktop navigation items (Dashboard, Profile, Notifications, Transactions, Settings, Livechat)
+export const desktopNavItems = [
   {
     key: "dashboard",
     label: "Dashboard",
@@ -159,16 +165,16 @@ export const navItems = [
     icon: <FaUser size={15} className="mx-auto" />,
   },
   {
+    key: "notifications",
+    label: "Notifications",
+    href: "/notifications",
+    icon: <FaBell size={15} className="mx-auto" />,
+  },
+  {
     key: "transactions",
     label: "Transactions",
     href: "/dashboard/transactions",
     icon: <FaCommentsDollar size={15} className="mx-auto" />,
-  },
-  {
-    key: "notifications",
-    label: "Notifications",
-    href: "/notification",
-    icon: <FaBell size={15} className="mx-auto" />,
   },
   {
     key: "settings",
@@ -177,12 +183,55 @@ export const navItems = [
     icon: <IoSettings size={15} className="mx-auto" />,
   },
   {
+    key: "livechat",
+    label: "Livechat",
+    href: "/livechat",
+    icon: <BiMessageSquareDetail size={15} className="mx-auto" />,
+  },
+  {
     key: "logout",
     label: "Logout",
     href: "/login",
-    icon: <TbLogout2 size={15} className="mx-auto text-" />,
+    icon: <TbLogout2 size={15} className="mx-auto" />,
   },
 ];
+
+// Mobile navigation items (Home, Profile, Transactions, Verification, Settings)
+export const mobileNavItems = [
+  {
+    key: "dashboard",
+    label: "Home",
+    href: "/dashboard",
+    icon: <HiOutlineHome size={16} className="mx-auto" />,
+  },
+  {
+    key: "profile",
+    label: "Profile",
+    href: "/profile",
+    icon: <FaUser size={16} className="mx-auto" />,
+  },
+  {
+    key: "transactions",
+    label: "Transactions",
+    href: "/dashboard/transactions",
+    icon: <FaCommentsDollar size={16} className="mx-auto" />,
+  },
+  {
+    key: "verification",
+    label: "Verification",
+    href: "/verification",
+    icon: <MdVerifiedUser size={16} className="mx-auto" />,
+  },
+  {
+    key: "settings",
+    label: "Settings",
+    href: "/settings",
+    icon: <IoSettings size={16} className="mx-auto" />,
+  },
+];
+
+// Legacy export for backward compatibility
+export const navItems = desktopNavItems;
 
 export const Incoming_funds_reclaim_history = [
   {

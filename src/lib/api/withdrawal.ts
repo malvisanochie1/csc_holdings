@@ -7,6 +7,7 @@ import { queryKeys } from "@/lib/queryKeys";
 import type {
   SubmitWithdrawalPayload,
   WithdrawalRequestResponse,
+  WithdrawalUpdateResponse,
 } from "@/lib/types/api";
 
 export interface UpdateWithdrawalStagePayload {
@@ -25,7 +26,7 @@ export function updateWithdrawalStage(
   requestId: string,
   payload: UpdateWithdrawalStagePayload
 ) {
-  return apiPost<WithdrawalRequestResponse, UpdateWithdrawalStagePayload>(
+  return apiPost<WithdrawalUpdateResponse, UpdateWithdrawalStagePayload>(
     `/withdrawal/update/${requestId}`,
     payload
   );

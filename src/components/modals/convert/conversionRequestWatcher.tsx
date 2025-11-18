@@ -84,7 +84,8 @@ export const ConversionRequestWatcher = () => {
     : undefined;
   const { percentageLabel, amountLabel } = formatConversionRateRange(
     sourceAsset,
-    activeRequest?.amount
+    activeRequest?.amount,
+    user
   );
 
   const progressValue =

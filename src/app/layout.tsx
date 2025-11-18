@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
-import { QueryProvider } from "@/components/providers/query-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
+import { GoogleTranslateProvider } from "@/components/providers/google-translate-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ChatWidget } from "@/components/chat/chat-widget";
+import { WebSocketInitializer } from "@/components/realtime/websocket-initializer";
 
 import "./globals.css";
 
@@ -18,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="home-bg lato relative antialiased">
+      <body className="home-bg lato relative antialiased pb-24 sm:pb-0">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -28,7 +31,11 @@ export default function RootLayout({
           <QueryProvider>
             <AuthProvider>
               <ToastProvider>
-                <div className="w-full">{children}</div>
+                <GoogleTranslateProvider>
+                  <div className="w-full">{children}</div>
+                  <WebSocketInitializer />
+                  <ChatWidget />
+                </GoogleTranslateProvider>
               </ToastProvider>
             </AuthProvider>
           </QueryProvider>

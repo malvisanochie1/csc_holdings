@@ -1,4 +1,5 @@
 import type { CurrencyAsset, UserResource } from "@/lib/types/api";
+import { formatUserCurrency } from "@/lib/currency";
 
 export function findUserAssetByWalletId(
   user: UserResource | null | undefined,
@@ -30,13 +31,6 @@ export function findUserCurrencyById(
   });
 }
 
-const usdFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
-
 const formatPercent = (value: number) => `${value.toFixed(2)}%`;
 
 const safeParseNumber = (value?: string | number | null): number => {
@@ -59,7 +53,8 @@ const normalizeRange = (min: number, max: number): [number, number] => {
 
 export function formatConversionRateRange(
   asset: CurrencyAsset | undefined,
-  amount?: number
+  amount?: number,
+  user?: UserResource | null
 ): {
   percentageLabel: string;
   amountLabel: string;
@@ -71,9 +66,10 @@ export function formatConversionRateRange(
   const percentageLabel = `${formatPercent(resolvedMin)} - ${formatPercent(resolvedMax)}`;
 
   if (typeof amount !== "number" || Number.isNaN(amount)) {
+    const zeroFormatted = formatUserCurrency(0, user).displayValue;
     return {
       percentageLabel,
-      amountLabel: `${usdFormatter.format(0)} - ${usdFormatter.format(0)}`,
+      amountLabel: `${zeroFormatted} - ${zeroFormatted}`,
     };
   }
 
@@ -82,10 +78,11 @@ export function formatConversionRateRange(
 
   return {
     percentageLabel,
-    amountLabel: `${usdFormatter.format(minValue)} - ${usdFormatter.format(maxValue)}`,
+    amountLabel: `${formatUserCurrency(minValue, user).displayValue} - ${formatUserCurrency(maxValue, user).displayValue}`,
   };
 }
 
-export function formatUsdAmount(value?: number | string | null) {
-  return usdFormatter.format(safeParseNumber(value));
+export function formatUsdAmount(value?: number | string | null, user?: UserResource | null) {
+  // Deprecated: Use formatUserCurrency instead
+  return formatUserCurrency(safeParseNumber(value), user).displayValue;
 }

@@ -9,6 +9,7 @@ import { getCountryCallingCode, getCountries } from "react-phone-number-input/in
 import { useRegister } from "@/lib/api/auth";
 import type { ApiErrors } from "@/lib/types/api";
 import { Eye, EyeOff, Shield, User, Mail, Phone, Globe, Lock, CheckCircle2 } from "lucide-react";
+import { useSiteTitle } from "@/hooks/use-site-title";
 import "react-phone-number-input/style.css";
 
 type RegisterForm = {
@@ -49,6 +50,8 @@ const RegisterPage = () => {
   const [status, setStatus] = React.useState<StatusState>(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const siteTitle = useSiteTitle();
+  const headlineTitle = React.useMemo(() => siteTitle.toUpperCase(), [siteTitle]);
 
   const requestError =
     registerMutation.error as (Error & { errors?: ApiErrors }) | null;
@@ -122,7 +125,7 @@ const RegisterPage = () => {
             <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
               Create Account
             </h1>
-            <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm">CSC ESCROW & SETTLEMENT UK</p>
+            <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm">{headlineTitle}</p>
             <p className="text-gray-600 dark:text-gray-300 text-xs mt-1">
               Secure platform for asset recovery
             </p>

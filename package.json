@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:spa": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview:spa": "npx serve .next-build"
   },
   "dependencies": {
     "@ark-ui/react": "^5.27.1",
@@ -23,15 +25,21 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "country-flag-icons": "^1.5.21",
+    "laravel-echo": "^2.2.6",
     "lightweight-charts": "^4.0.1",
     "lucide-react": "^0.548.0",
     "next": "15.5.4",
     "next-themes": "^0.4.6",
+    "pusher-js": "^8.4.0",
     "react": "19.1.0",
+    "react-country-flag": "^3.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
     "react-phone-number-input": "^3.4.13",
+    "react-select": "^5.10.2",
     "recharts": "2.15.4",
+    "socket.io-client": "^4.8.1",
     "sweetalert2": "^11.26.3",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",

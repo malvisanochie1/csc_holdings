@@ -1,197 +1,243 @@
 "use client";
 
-import { useState } from "react";
-import { Globe, Moon, DollarSign, Save, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import React from "react";
+import { Moon } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { ModeToggle } from "@/components/ui/modetoggle";
+import { LanguageSelect } from "@/components/ui/language-select";
+import { useToast } from "@/components/providers/toast-provider";
+import { useSettings, useUpdateSettings } from "@/lib/api/settings";
+import { useSettingsStore } from "@/lib/store/settings";
+import { useAuthStore } from "@/lib/store/auth";
+import { getCurrencyFlag } from "@/lib/constants/currencies";
+import { getLanguageByCode } from "@/lib/constants/languages";
+import { UserCurrency } from "@/lib/types/api";
 import Navbar from "@/components/sections/navs/navbar";
 import Sidebar from "@/components/sections/navs/sidebar";
 
 export default function SettingsPage() {
-  const [currency, setCurrency] = useState("USD");
-  const [language, setLanguage] = useState("en");
-  const [theme, setTheme] = useState("light");
-  const [isSaved, setIsSaved] = useState(false);
+  const { user } = useAuthStore();
+  const { showToast } = useToast();
+  const { currentLanguage, setLanguage } = useSettingsStore();
+  
+  const { data: settingsData, isLoading: settingsLoading } = useSettings();
+  const { mutate: updateSettings, isPending: isUpdatingSettings } = useUpdateSettings();
 
-  const handleSave = () => {
-    localStorage.setItem("currency", currency);
-    localStorage.setItem("language", language);
-    localStorage.setItem("theme", theme);
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
+  const [selectedCurrencyId, setSelectedCurrencyId] = React.useState<number | undefined>(
+    user?.currency?.id
+  );
+  const [selectedLanguageCode, setSelectedLanguageCode] = React.useState<string>(
+    currentLanguage.code
+  );
+
+  // Update local state when user data changes - fix recursion
+  React.useEffect(() => {
+    if (user?.currency?.id) {
+      setSelectedCurrencyId(user.currency.id);
+    }
+  }, [user?.currency?.id]);
+
+  React.useEffect(() => {
+    setSelectedLanguageCode(currentLanguage.code);
+  }, [currentLanguage.code]);
+
+  const handleCurrencySelect = async (currency: UserCurrency) => {
+    if (!currency.id || isUpdatingSettings) return;
+
+    try {
+      await updateSettings({ currency_id: currency.id });
+      setSelectedCurrencyId(currency.id);
+      showToast({
+        type: "success",
+        title: "Currency updated successfully",
+      });
+    } catch (error) {
+      const apiError = error as Error & { message?: string };
+      showToast({
+        type: "error",
+        title: "Failed to update currency",
+        description: apiError?.message || "Please try again",
+      });
+    }
   };
 
-  const handleCancel = () => {
-    setCurrency(localStorage.getItem("currency") || "USD");
-    setLanguage(localStorage.getItem("language") || "en");
-    setTheme(localStorage.getItem("theme") || "light");
+  const handleLanguageSelect = async (languageCode: string) => {
+    if (isUpdatingSettings || languageCode === selectedLanguageCode) return;
+
+    try {
+      await updateSettings({ language: languageCode });
+      
+      // Update language in store immediately
+      const newLanguage = getLanguageByCode(languageCode);
+      if (newLanguage) {
+        setLanguage({
+          code: newLanguage.code,
+          name: newLanguage.name,
+          flag: newLanguage.flag,
+        });
+      }
+      
+      setSelectedLanguageCode(languageCode);
+      showToast({
+        type: "success",
+        title: "Language updated successfully",
+      });
+    } catch (error) {
+      const apiError = error as Error & { message?: string };
+      showToast({
+        type: "error",
+        title: "Failed to update language",
+        description: apiError?.message || "Please try again",
+      });
+    }
   };
+
+  if (settingsLoading) {
+    return (
+      <>
+        <Navbar />
+        <div className="flex home-bg lg:h-screen">
+          <div className="max-w-[240px] w-full hidden xl:flex">
+            <Sidebar />
+          </div>
+          <div className="w-full">
+            <div className="w-full home-bg p-3 sm:px-5 md:px-7 lg:px-10">
+              <div className="col-span-2 p-4">
+                <div className="space-y-1">
+                  <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Settings</h1>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Loading your dashboard preferences and account settings
+                  </p>
+                </div>
+              </div>
+              <div className="mt-5 sm:mt-10">
+                <div className="flex items-center justify-center py-20">
+                  <div className="text-center">
+                    <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <span className="text-muted-foreground">Loading settings...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <Navbar />
-      <div className="flex home-bg h-screen overflow-hidden">
-        <div className="max-w-[240px] w-full hidden xl:flex flex-shrink-0">
+      <div className="flex home-bg lg:h-screen">
+        <div className="max-w-[240px] w-full hidden xl:flex">
           <Sidebar />
         </div>
-        <div className="w-full flex flex-col overflow-hidden">
-          <div className="flex-1 px-6 md:px-8 pb-24 sm:pb-8 overflow-y-auto">
-          <div className="max-w-3xl mx-auto ">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-foreground mb-2">
-                Settings
-              </h1>
-              <p className="text-muted-foreground">
-                Manage your preferences and account settings
-              </p>
-            </div>
-            <div className="space-y-4 mb-8">
-              <Card className="p-6 border border-border hover:shadow-sm transition-shadow">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 bg-emerald-50 dark:bg-emerald-950 rounded-lg flex-shrink-0">
-                      <DollarSign className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">
-                        Currency
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        Choose your preferred currency for transactions
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4 ml-16">
-                  <Label
-                    htmlFor="currency"
-                    className="text-sm font-medium text-foreground mb-2 block"
-                  >
-                    Select Currency
-                  </Label>
-                  <Select value={currency} onValueChange={setCurrency}>
-                    <SelectTrigger
-                      id="currency"
-                      className="w-full md:w-64 border-border"
-                    >
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="USD">USD - US Dollar</SelectItem>
-                      <SelectItem value="EUR">EUR - Euro</SelectItem>
-                      <SelectItem value="GBP">GBP - British Pound</SelectItem>
-                      <SelectItem value="JPY">JPY - Japanese Yen</SelectItem>
-                      <SelectItem value="AUD">
-                        AUD - Australian Dollar
-                      </SelectItem>
-                      <SelectItem value="CAD">CAD - Canadian Dollar</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </Card>
-              <Card className="p-6 border border-border hover:shadow-sm transition-shadow">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg flex-shrink-0">
-                      <Globe className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">
-                        Language
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        Select your preferred language for the interface
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4 ml-16">
-                  <Label
-                    htmlFor="language"
-                    className="text-sm font-medium text-foreground mb-2 block"
-                  >
-                    Select Language
-                  </Label>
-                  <Select value={language} onValueChange={setLanguage}>
-                    <SelectTrigger
-                      id="language"
-                      className="w-full md:w-64 border-border"
-                    >
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="en">English</SelectItem>
-                      <SelectItem value="es">Español</SelectItem>
-                      <SelectItem value="fr">Français</SelectItem>
-                      <SelectItem value="de">Deutsch</SelectItem>
-                      <SelectItem value="ja">日本語</SelectItem>
-                      <SelectItem value="zh">中文</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </Card>
-              <Card className="p-6 border border-border hover:shadow-sm transition-shadow">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 bg-purple-50 dark:bg-purple-950 rounded-lg flex-shrink-0">
-                      <Moon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">
-                        Theme
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        Choose between light and dark mode
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4 ml-16">
-                  <Label
-                    htmlFor="theme"
-                    className="text-sm font-medium text-foreground mb-2 block"
-                  >
-                    Select Theme
-                  </Label>
-                  <ModeToggle />
-                </div>
-              </Card>
-            </div>
-            <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleCancel}
-                className="gap-2"
-              >
-                <X className="w-4 h-4" />
-                Reset
-              </Button>
-              <Button type="button" onClick={handleSave} className="gap-2">
-                <Save className="w-4 h-4" />
-                Save Preferences
-              </Button>
-            </div>
-            {isSaved && (
-              <div
-                className="mt-4 text-sm text-emerald-600 flex items-center gap-2"
-                role="status"
-                aria-live="polite"
-              >
-                <Save className="w-4 h-4" />
-                Preferences saved successfully
+        <div className="w-full">
+          <div className="w-full home-bg p-3 sm:px-5 md:px-7 lg:px-10">
+            <div className="col-span-2 p-4">
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Settings</h1>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Manage your dashboard preferences and account settings
+                </p>
               </div>
-            )}
-          </div>
+            </div>
+            <div className="mt-5 sm:mt-10">
+              <div className="space-y-6">
+                {/* Currency Section */}
+                <Card className="p-6">
+                  <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-foreground">
+                      Currency
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      Select your preferred currency for displaying amounts throughout the platform
+                    </p>
+                    
+                    <div className="max-h-48 overflow-y-auto pr-2 -mr-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        {settingsData?.currencies?.map((currency) => (
+                          <button
+                            key={currency.id}
+                            onClick={() => handleCurrencySelect(currency)}
+                            disabled={isUpdatingSettings}
+                            className={`
+                              flex items-center gap-2 p-3 rounded-lg border transition-all duration-200
+                              ${selectedCurrencyId === currency.id 
+                                ? 'bg-emerald-50 dark:bg-emerald-950 border-emerald-500 text-emerald-700 dark:text-emerald-300' 
+                                : 'bg-muted/50 border-border text-muted-foreground hover:bg-muted hover:border-muted-foreground/20'
+                              }
+                              ${isUpdatingSettings ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+                              relative
+                            `}
+                          >
+                            <div className="text-lg">
+                              {getCurrencyFlag(currency.code || '')}
+                            </div>
+                            <span className="font-medium text-sm">
+                              {currency.code}
+                            </span>
+                            {selectedCurrencyId === currency.id && (
+                              <div className="absolute -top-1 -left-1 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Language Section */}
+                <Card className="p-6">
+                  <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-foreground">
+                      Language
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      Choose your preferred language for the interface and content translation
+                    </p>
+                    
+                    <div className="max-w-md">
+                      <LanguageSelect
+                        value={selectedLanguageCode}
+                        onValueChange={handleLanguageSelect}
+                        placeholder="Choose your language"
+                        disabled={isUpdatingSettings}
+                      />
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Theme Section */}
+                <Card className="p-6">
+                  <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-foreground">
+                      Theme
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      Choose between light and dark mode for your interface
+                    </p>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-purple-100 dark:bg-purple-950 rounded-lg">
+                          <Moon className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-foreground">
+                            Appearance
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            Toggle between light and dark themes
+                          </p>
+                        </div>
+                      </div>
+                      <ModeToggle />
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,10 @@ import type {
   DepositItem,
   SubmitDepositPayload,
   SubmitWithdrawalPayload,
+  Transaction,
+  TransactionsResponse,
   WalletTransactionsResponse,
+  WalletTransactionsViewResponse,
   WithdrawalItem,
 } from "@/lib/types/api";
 import { queryKeys } from "@/lib/queryKeys";
@@ -32,6 +35,14 @@ export function getWalletTransactions() {
   return apiGet<WalletTransactionsResponse>("/wallet-transactions");
 }
 
+export function getWalletTransactionsView(walletId: string) {
+  return apiGet<WalletTransactionsViewResponse>(`/wallet-transactions/${walletId}`);
+}
+
+export function getUserTransactions() {
+  return apiGet<Transaction[]>("/user/transactions");
+}
+
 // Hooks
 export function useDeposits() {
   return useQuery({
@@ -55,6 +66,22 @@ export function useWalletTransactions(options?: { enabled?: boolean }) {
   });
 }
 
+export function useWalletTransactionsView(
+  walletId?: string,
+  options?: { enabled?: boolean }
+) {
+  return useQuery({
+    queryKey: queryKeys.walletTransactionsView(walletId ?? "unknown"),
+    queryFn: async () => {
+      if (!walletId) {
+        throw new Error("walletId is required to fetch wallet transactions view");
+      }
+      return (await getWalletTransactionsView(walletId)).data;
+    },
+    enabled: Boolean(walletId) && (options?.enabled ?? true),
+  });
+}
+
 export function useSubmitDeposit() {
   const qc = useQueryClient();
   return useMutation({
@@ -62,6 +89,24 @@ export function useSubmitDeposit() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: queryKeys.deposits });
     },
+  });
+}
+
+export function useUserTransactions(options?: { enabled?: boolean }) {
+  return useQuery({
+    queryKey: queryKeys.userTransactions,
+    queryFn: async () => {
+      const response = await getUserTransactions();
+      const normalizedData = Array.isArray(response?.data)
+        ? (response.data as Transaction[])
+        : [];
+      return {
+        status: response?.status ?? "success",
+        message: response?.message ?? "",
+        data: normalizedData,
+      } satisfies TransactionsResponse;
+    },
+    enabled: options?.enabled ?? true,
   });
 }
 

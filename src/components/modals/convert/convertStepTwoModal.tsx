@@ -2,8 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { CurrencyInput } from "@/components/ui/currency-input";
 import { useUpdateConversionRequest } from "@/lib/api/conversion";
 import { useToast } from "@/components/providers/toast-provider";
 import FlowModal from "@/components/modals/flow/flowModal";
@@ -53,12 +53,8 @@ const ConvertStepTwoModal = ({
   } = useUpdateConversionRequest();
   const [inputError, setInputError] = React.useState<string | null>(null);
 
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = event.target.value ?? "";
-    const sanitized = rawValue
-      .replace(/[^0-9.]/g, "")
-      .replace(/(\..*?)\..*/g, "$1");
-    onPaymentAmountChange?.(sanitized);
+  const handleAmountChange = (numericValue: string) => {
+    onPaymentAmountChange?.(numericValue);
     if (inputError) {
       setInputError(null);
     }
@@ -156,10 +152,9 @@ const ConvertStepTwoModal = ({
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Type the amount you would like to pay for conversion:
           </label>
-          <Input
+          <CurrencyInput
             value={paymentAmount}
-            inputMode="decimal"
-            onChange={handleAmountChange}
+            onValueChange={handleAmountChange}
             placeholder="Enter amount"
             className="h-12 rounded-xl border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 dark:border-white/15 dark:bg-gray-900 dark:text-white"
           />
@@ -170,6 +165,16 @@ const ConvertStepTwoModal = ({
           Within the duration of <strong>{resolvedConversionPeriod}</strong>, the conversion rate will remain {feeRange}.
           After this timeframe, conversion rates are subject to change according to real-time asset price fluctuations.
         </p>
+
+        <div className="rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-3 text-sm text-amber-900 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-50">
+          <p className="font-semibold uppercase tracking-[0.2em] text-xs text-amber-600 dark:text-amber-200">
+            submission window
+          </p>
+          <p className="mt-1">
+            Conversion fees should be submitted within <strong>{resolvedConversionPeriod}</strong> to keep the approved desk rate active.
+            Payments made after this window may require a new calculation.
+          </p>
+        </div>
 
         <div className="flex justify-end pt-2">
           <Button

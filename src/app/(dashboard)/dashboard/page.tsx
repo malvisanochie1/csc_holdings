@@ -33,10 +33,10 @@ const DashboardPage = () => {
           <Sidebar />
         </div>
         <div className="w-full flex flex-col overflow-hidden">
-          <div className="sticky top-0 z-40 home-bg px-3 sm:px-5 pt-3 sm:pt-5 flex-shrink-0">
-            <DashboardHeader />
-          </div>
           <div className="flex-1 px-3 sm:px-5 pb-24 sm:pb-5 overflow-y-auto">
+            <div className="pt-3 sm:pt-5">
+              <DashboardHeader />
+            </div>
             <ConversionRequestWatcher />
             <WithdrawalStageWatcher />
             <AccountOverview />

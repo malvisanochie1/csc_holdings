@@ -1,31 +1,39 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
 
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'queekapp-files.s3.us-east-1.amazonaws.com',
-        pathname: '/photos/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'queekapp-files.s3.us-east-1.amazonaws.com',
-        pathname: '/**',
+        hostname: '**',
+        pathname: '**',
       },
       {
         protocol: 'http',
-        hostname: 'csc.test',
-        pathname: '/**',
+        hostname: '**',
+        pathname: '**',
       },
     ],
   },
 
-  distDir: process.env.NODE_ENV === 'production' || process.env.CI
-      ? '.next'
-      : '.next-dev',
+  // distDir: process.env.NODE_ENV === 'production' || process.env.CI
+  //     ? '.next-build'
+  //     : '.next-dev',
 
 };
 
 export default nextConfig;
+
+
+// import type { NextConfig } from 'next'
+//
+// const nextConfig: NextConfig = {
+//   output: 'export',
+// }
+//
+// export default nextConfig

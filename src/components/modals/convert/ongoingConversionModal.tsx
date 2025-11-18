@@ -1,23 +1,14 @@
 "use client";
 
 import React from "react";
-import { ArrowRightLeft, ShieldAlert, Loader2 } from "lucide-react";
+import { ArrowRightLeft, Loader2 } from "lucide-react";
 import FlowModal from "@/components/modals/flow/flowModal";
 import { Button } from "@/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import type { ConversionRequest, CurrencyAsset, PaymentWallet } from "@/lib/types/api";
 import { useCancelConversionRequest } from "@/lib/api/conversion";
 import { useToast } from "@/components/providers/toast-provider";
+import { useAuthStore } from "@/lib/store/auth";
+import Swal from "sweetalert2";
 import ConvertStepTwoModal from "@/components/modals/convert/convertStepTwoModal";
 import ConvertStepThreeModal from "@/components/modals/convert/convertStepThreeModal";
 import { formatConversionRateRange } from "@/lib/wallets";
@@ -41,6 +32,7 @@ const OngoingConversionModal = ({
   paymentWallet,
   ...rest
 }: OngoingConversionModalProps) => {
+  const { user } = useAuthStore();
   const { titleClassName: restTitleClassName, ...flowModalProps } = rest;
   const [isOpen, setIsOpen] = React.useState(false);
   const [isStepTwoOpen, setIsStepTwoOpen] = React.useState(false);
@@ -49,12 +41,12 @@ const OngoingConversionModal = ({
   const { showToast } = useToast();
   const {
     mutateAsync: cancelRequest,
-    isPending: isCancelling,
   } = useCancelConversionRequest();
 
   const { percentageLabel, amountLabel } = formatConversionRateRange(
     sourceAsset,
-    request.amount
+    request.amount,
+    user
   );
 
   const statusLabel = request.status?.replace(/_/g, " ") ?? "pending";
@@ -65,22 +57,78 @@ const OngoingConversionModal = ({
   const requestMessage = request.message?.trim();
 
   const handleCancel = async () => {
+    // Close the existing modal first to avoid z-index conflicts
+    setIsOpen(false);
+    
+    const result = await Swal.fire({
+      title: "Are you sure you want to cancel?",
+      html: '<span style="color: #dc2626;">This action cannot be undone. Your request will be reset, and you\'ll be required to begin a new conversion and full compliance verification.</span>',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, cancel it!",
+      cancelButtonText: "No, keep it",
+      reverseButtons: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    });
+
+    if (!result.isConfirmed) {
+      // If user cancels, reopen the modal
+      setIsOpen(true);
+      return;
+    }
+
+    // Show loading state in SweetAlert
+    Swal.fire({
+      title: "Cancelling conversion...",
+      text: "Please wait while we process your cancellation.",
+      icon: "info",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
     try {
       const response = await cancelRequest(request.id);
       const message = response?.message ?? "Conversion request cancelled";
+      
+      // Show success message
+      await Swal.fire({
+        title: "Cancelled!",
+        text: message,
+        icon: "success",
+        confirmButtonColor: "#10b981",
+      });
+      
       showToast({ type: "success", title: message });
-      setIsOpen(false);
     } catch (error) {
       const apiError = error as Error & { error?: string };
       const description =
         apiError?.error && apiError.error !== apiError.message
           ? apiError.error
-          : undefined;
+          : "Please try again or contact support";
+      
+      // Show error message
+      await Swal.fire({
+        title: "Error!",
+        text: apiError?.message || "Unable to cancel conversion",
+        icon: "error",
+        confirmButtonColor: "#dc2626",
+      });
+      
       showToast({
         type: "error",
         title: apiError?.message || "Unable to cancel conversion",
         description,
       });
+      
+      // Reopen the modal on error
+      setIsOpen(true);
     }
   };
 
@@ -92,8 +140,8 @@ const OngoingConversionModal = ({
   const eyebrowLabel = isProcessing ? undefined : "Conversion";
 
   const fallbackInfoMessage = isProcessing
-    ? "Your confirmation was received. Our escrow desk is finalizing settlement within the stated conversion window."
-    : `Your conversion fee should fall between ${percentageLabel} (≈ ${amountLabel}). Conversion window: ${conversionPeriod ?? "10 days"}. Submit the fee within this window to move your request into settlement.`;
+    ? "Your confirmation was received. Our escrow desk is finalizing settlement within the stated conversion period."
+    : `Your conversion fee should fall between ${percentageLabel} (≈ ${amountLabel}). Conversion period: ${conversionPeriod ?? "10 days"}. Conversion fees should be submitted within the duration.`;
 
   const informationalMessage = requestMessage || fallbackInfoMessage;
 
@@ -154,49 +202,14 @@ const OngoingConversionModal = ({
         </section>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                type="button"
-                variant="outline"
-                className="cursor-pointer border-rose-200 text-rose-600 hover:bg-rose-50"
-              >
-                Cancel Conversion
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent className="sm:max-w-md border border-gray-100 bg-white/95 p-0 shadow-2xl shadow-gray-900/10 dark:border-white/10 dark:bg-gray-900">
-              <div className="space-y-4 px-6 py-6">
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex size-10 items-center justify-center rounded-full bg-rose-100 text-rose-600 dark:bg-rose-500/10 dark:text-rose-300">
-                    <ShieldAlert className="size-5" />
-                  </span>
-                  <AlertDialogHeader className="p-0">
-                    <AlertDialogTitle className="text-base font-semibold text-gray-900 dark:text-white">
-                      Confirm cancellation
-                    </AlertDialogTitle>
-                    <AlertDialogDescription className="text-sm text-gray-500 dark:text-gray-400">
-                      This action cannot be undone. Cancelling will move your request back to the beginning of the queue.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                </div>
-                <div className="rounded-2xl border border-rose-100 bg-rose-50/60 p-4 text-sm text-rose-800 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-100">
-                  You’ll need to initiate a new conversion and repeat the compliance checks if you cancel now.
-                </div>
-              </div>
-              <AlertDialogFooter className="gap-3 border-t border-gray-100 px-6 py-4 dark:border-white/5">
-                <AlertDialogCancel className="cursor-pointer rounded-full border border-gray-200 px-5 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:border-white/10 dark:text-gray-300">
-                  Go back
-                </AlertDialogCancel>
-                <AlertDialogAction
-                  className="cursor-pointer rounded-full bg-rose-600 px-5 py-2 text-sm font-semibold text-white hover:bg-rose-500"
-                  onClick={handleCancel}
-                  disabled={isCancelling}
-                >
-                  {isCancelling ? "Cancelling..." : "Yes, cancel"}
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Button
+            type="button"
+            variant="outline"
+            className="cursor-pointer border-rose-200 text-rose-600 hover:bg-rose-50"
+            onClick={handleCancel}
+          >
+            Cancel Conversion
+          </Button>
 
           <Button
             type="button"

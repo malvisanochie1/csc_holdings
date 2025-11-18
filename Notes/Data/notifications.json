@@ -1,0 +1,30 @@
+{
+  "status": "success",
+  "message": "Notifications fetched successfully",
+  "data": [
+    {
+      "id": "36c30f2c-618f-4d52-b69b-389129823213",
+      "title": "Withdrawal Request Created",
+      "message": "Your withdrawal request of 2200.00000000000000000000 from Euro has been submitted.",
+      "image": null,
+      "color": "blue",
+      "type": "withdrawal",
+      "time": "2025-11-17T16:57:48.871493Z",
+      "read_at": "2025-11-17T20:01:00.000000Z",
+      "created_at": "3 hours ago",
+      "read": true
+    },
+    {
+      "id": "c3728a45-705c-461b-ba13-3b8c17a5eeec",
+      "title": "Conversion Request Updated",
+      "message": "Your conversion request status has been updated to: Processing",
+      "image": null,
+      "color": "orange",
+      "type": "conversion",
+      "time": "2025-11-17T16:53:59.913151Z",
+      "read_at": "2025-11-17T20:01:03.000000Z",
+      "created_at": "3 hours ago",
+      "read": true
+    }
+  ]
+}

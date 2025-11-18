@@ -2,29 +2,48 @@
 import React from "react";
 import { FaArrowDownLong } from "react-icons/fa6";
 import AssetCard from "./assetCard";
-import { useAuthStore } from "@/lib/store/auth";
+import type { DashboardAssetCard } from "./financialAssets";
 
-const FinancialAssetsMobile = () => {
-  const { user } = useAuthStore();
-  const assets = React.useMemo(() => user?.assets ?? [], [user?.assets]);
-  const currencies = React.useMemo(() => user?.currencies ?? [], [user?.currencies]);
+interface CurrencySummary {
+  id?: string;
+  image?: string;
+  name?: string;
+  balance?: number | string;
+  symbol?: string;
+  user_wallet_id?: string;
+}
 
+interface FinancialAssetsMobileProps {
+  assets: DashboardAssetCard[];
+  currencies: CurrencySummary[];
+}
+
+const FinancialAssetsMobile = ({
+  assets,
+  currencies,
+}: FinancialAssetsMobileProps) => {
   return (
     <div className="sm:hidden flex flex-col">
       <div className="mt-6 grid grid-cols-2 gap-3">
-        {assets.map((asset) => (
+        {assets.map((asset, index) => {
+          const isLast = index === assets.length - 1;
+          const shouldSpan = assets.length % 2 === 1 && isLast;
+          return (
           <AssetCard
             key={asset.id}
-            img={asset.image}
-            currency={asset.name}
-            amount={asset.balance}
-            option={asset.symbol}
+            img={asset.img}
+            currency={asset.currency}
+            amount={asset.amount}
+            option={asset.option}
             actionType="convert"
             walletId={asset.id}
-            userWalletId={asset.user_wallet_id}
-            percentageChange={0}
+            userWalletId={asset.userWalletId}
+            percentageChange={asset.changePercent}
+            showPercentage={typeof asset.changePercent === "number"}
+            className={shouldSpan ? "col-span-2" : ""}
           />
-        ))}
+        );
+        })}
       </div>
 
       <div className="flex justify-center w-full my-4">
@@ -40,19 +59,32 @@ const FinancialAssetsMobile = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {currencies.map((currency) => (
-          <AssetCard
-            key={currency.id}
-            img={currency.image}
-            currency={currency.name}
-            amount={currency.balance}
-            option={currency.symbol}
-            actionType="withdraw"
-            walletId={currency.id}
-            userWalletId={currency.user_wallet_id}
-            showPercentage={false}
-          />
-        ))}
+        {currencies.map((currency, index) => {
+          const image = currency.image ?? "/dashboard/asset.gif";
+          const label = currency.name ?? currency.symbol ?? "Wallet";
+          const symbol = currency.symbol ?? "";
+          const amount =
+            typeof currency.balance === "number"
+              ? currency.balance
+              : currency.balance ?? 0;
+          const isLast = index === currencies.length - 1;
+          const shouldSpan = currencies.length % 2 === 1 && isLast;
+
+          return (
+            <AssetCard
+              key={currency.id}
+              img={image}
+              currency={label}
+              amount={amount}
+              option={symbol}
+              actionType="withdraw"
+              walletId={currency.id}
+              userWalletId={currency.user_wallet_id}
+              showPercentage={false}
+              className={shouldSpan ? "col-span-2" : ""}
+            />
+          );
+        })}
       </div>
     </div>
   );

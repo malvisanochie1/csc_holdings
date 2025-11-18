@@ -6,6 +6,9 @@ import FlowModal from "@/components/modals/flow/flowModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
+import { formatUserCurrency } from "@/lib/currency";
+import { useAuthStore } from "@/lib/store/auth";
+import { getCountryCallingCode, getCountries } from "react-phone-number-input/input";
 import {
   withdrawalMethodTabs,
   withdrawalCryptoOptions,
@@ -15,6 +18,8 @@ import type { CurrencyAsset, SubmitWithdrawalPayload } from "@/lib/types/api";
 import { cn } from "@/lib/utils";
 import { useSubmitWithdrawalRequest } from "@/lib/api/withdrawal";
 import { useToast } from "@/components/providers/toast-provider";
+
+type DialCodeCountry = Parameters<typeof getCountryCallingCode>[0];
 
 export interface WithdrawProps extends Omit<React.ComponentProps<typeof FlowModal>, "title" | "children"> {
   triggerText?: string;
@@ -34,6 +39,7 @@ export function Withdraw({
   onOpenChange,
   ...dialogProps
 }: WithdrawProps) {
+  const { user } = useAuthStore();
   const [internalOpen, setInternalOpen] = React.useState(false);
   const [method, setMethod] = React.useState<WithdrawalMethodKey>(defaultMethod);
   const [selectedCryptoId, setSelectedCryptoId] = React.useState(
@@ -48,6 +54,9 @@ export function Withdraw({
     bankName: "",
     swift: "",
     notes: "",
+    country: "",
+    countryIso: "",
+    countryDialCode: "",
   });
   const { showToast } = useToast();
   const { mutateAsync: submitWithdrawal, isPending } = useSubmitWithdrawalRequest();
@@ -68,14 +77,55 @@ export function Withdraw({
 
   const availableBalanceValue = parseBalanceValue(wallet?.balance ?? wallet?.balance_val);
   const availableBalanceLabel = React.useMemo(
-    () => availableBalanceValue.toLocaleString(),
-    [availableBalanceValue]
+    () => formatUserCurrency(availableBalanceValue, user).displayValue,
+    [availableBalanceValue, user]
   );
   const walletCurrencyId = wallet?.id;
+  const countryOptions = React.useMemo<DialCodeCountry[]>(
+    () => getCountries() as DialCodeCountry[],
+    []
+  );
+
+  const getCountryName = React.useCallback((countryCode: string) => {
+    try {
+      const displayNames = new Intl.DisplayNames(["en"], { type: "region" });
+      return displayNames.of(countryCode) ?? countryCode;
+    } catch {
+      return countryCode;
+    }
+  }, []);
+
+  const handleBankCountryChange = React.useCallback(
+    (countryCode: string) => {
+      if (!countryCode) {
+        setBankForm((prev) => ({ ...prev, countryIso: "", country: "", countryDialCode: "" }));
+        return;
+      }
+      const resolvedName = getCountryName(countryCode);
+      const callingCode = getCountryCallingCode(countryCode as DialCodeCountry);
+      setBankForm((prev) => ({
+        ...prev,
+        countryIso: countryCode,
+        country: resolvedName || countryCode,
+        countryDialCode: callingCode ? `+${callingCode}` : prev.countryDialCode,
+      }));
+    },
+    [getCountryName]
+  );
 
   const resetForms = () => {
     setCryptoForm({ walletAddress: "" });
-    setBankForm({ accountName: "", accountNumber: "", iban: "", bankName: "", swift: "", notes: "" });
+    setBankForm({
+      accountName: "",
+      accountNumber: "",
+      iban: "",
+      bankName: "",
+      swift: "",
+      notes: "",
+      country: "",
+      countryIso: "",
+      countryDialCode: "",
+    });
     setWalletAddressError(null);
   };
 
@@ -120,7 +170,7 @@ export function Withdraw({
         payload.wallet_address = cryptoForm.walletAddress.trim();
         payload.crypto_type = selectedCrypto?.label;
       } else {
-        if (!bankForm.accountName || !bankForm.accountNumber || !bankForm.bankName) {
+        if (!bankForm.accountName || !bankForm.accountNumber || !bankForm.bankName || !bankForm.country) {
           showToast({ type: "error", title: "Complete your bank details" });
           return;
         }
@@ -130,6 +180,8 @@ export function Withdraw({
         payload.bank_name = bankForm.bankName;
         payload.bank_swift_code = bankForm.swift;
         payload.bank_additional_info = bankForm.notes;
+        payload.bank_country = bankForm.country;
+        payload.bank_country_code = bankForm.countryIso;
       }
 
       const response = await submitWithdrawal(payload);
@@ -198,13 +250,13 @@ export function Withdraw({
       <Field>
         <FieldLabel>Transaction amount</FieldLabel>
         <Input
-          value={`${wallet?.symbol ?? "$"} ${availableBalanceLabel}`}
+          value={availableBalanceLabel}
           readOnly
           disabled
           className="h-12 rounded-xl bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Balance: {availableBalanceLabel} {wallet?.symbol ?? "USD"}
+          Balance: {availableBalanceLabel}
         </p>
       </Field>
       <Field>
@@ -230,7 +282,7 @@ export function Withdraw({
       <Field>
         <FieldLabel>Transaction amount</FieldLabel>
         <Input
-          value={`${wallet?.symbol ?? "$"} ${availableBalanceLabel}`}
+          value={availableBalanceLabel}
           readOnly
           disabled
           className="h-12 rounded-xl bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
@@ -262,6 +314,43 @@ export function Withdraw({
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field>
+          <FieldLabel>Country</FieldLabel>
+          <div className="relative">
+            <select
+              className="h-12 w-full appearance-none rounded-xl border border-gray-200 bg-gray-50/80 px-3 pr-10 text-sm font-medium text-gray-700 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-white/10 dark:bg-gray-900/40 dark:text-gray-100"
+              value={bankForm.countryIso}
+              onChange={(event) => handleBankCountryChange(event.target.value)}
+            >
+              <option value="">Select country</option>
+              {countryOptions.map((country) => (
+                <option key={country} value={country}>
+                  {getCountryName(country)} (+{getCountryCallingCode(country)})
+                </option>
+              ))}
+            </select>
+            <svg
+              className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </Field>
+        <Field>
+          <FieldLabel>Swift / BIC</FieldLabel>
+          <Input
+            value={bankForm.swift}
+            onChange={(event) => setBankForm((prev) => ({ ...prev, swift: event.target.value }))}
+            placeholder="Enter swift code"
+            className="rounded-xl"
+          />
+        </Field>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field>
           <FieldLabel>IBAN</FieldLabel>
           <Input
             value={bankForm.iban}
@@ -280,15 +369,6 @@ export function Withdraw({
           />
         </Field>
       </div>
-      <Field>
-        <FieldLabel>Swift / BIC</FieldLabel>
-        <Input
-          value={bankForm.swift}
-          onChange={(event) => setBankForm((prev) => ({ ...prev, swift: event.target.value }))}
-          placeholder="Enter swift code"
-          className="rounded-xl"
-        />
-      </Field>
       <Field>
         <FieldLabel>Notes (optional)</FieldLabel>
         <Input
@@ -313,7 +393,7 @@ export function Withdraw({
       open={resolvedOpen}
       onOpenChange={handleClose}
       title="Fund Withdrawal"
-      subtitle="Choose a withdrawal rail and confirm your details"
+      subtitle="Choose a withdrawal type and confirm your details"
       contentClassName="max-w-4xl"
       dialogClassName="sm:max-w-4xl"
       {...dialogProps}
@@ -347,7 +427,7 @@ export function Withdraw({
             <div className="rounded-2xl border border-gray-100 bg-gray-50/70 p-4 dark:border-white/10 dark:bg-gray-900">
               <p className="text-xs uppercase tracking-[0.3em] text-gray-500">Available balance</p>
               <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">
-                {wallet.symbol ?? "$"} {availableBalanceLabel}
+                {availableBalanceLabel}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">{wallet.name}</p>
             </div>

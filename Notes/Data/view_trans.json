@@ -1,0 +1,190 @@
+{
+  "status": "success",
+  "message": "Wallet transactions retrieved successfully",
+  "data": {
+    "wallet": {
+      "id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+      "name": "XRP",
+      "symbol": "XRP",
+      "image": "http://csc.test/default/wallets/XRP.png",
+      "is_fiat": false,
+      "balance": 500,
+      "conversion_rate": {
+        "min": "20.00",
+        "max": "30.00"
+      },
+      "active": true
+    },
+    "summary": "This asset has recorded 3 transactions on the XRP ledger network.",
+    "transactions": [
+      {
+        "id": "a05d0ab1-180f-49a3-988f-7d6a8be7a4de",
+        "wallet_id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+        "wallet": {
+          "id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+          "name": "XRP",
+          "symbol": "XRP",
+          "image": "http://csc.test/default/wallets/XRP.png",
+          "is_fiat": false
+        },
+        "amount": 1000,
+        "status": "completed",
+        "color": "green",
+        "type": "credit",
+        "description": null,
+        "company": "Snow and Keller Traders",
+        "created_at": "2025-11-15T14:51:57+01:00"
+      },
+      {
+        "id": "a05d0a82-985d-4ffb-9c66-9d9e7176569c",
+        "wallet_id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+        "wallet": {
+          "id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+          "name": "XRP",
+          "symbol": "XRP",
+          "image": "http://csc.test/default/wallets/XRP.png",
+          "is_fiat": false
+        },
+        "amount": 10300,
+        "status": "pending",
+        "color": "yellow",
+        "type": "credit",
+        "description": null,
+        "company": "Snow and Keller Traders",
+        "created_at": "2025-11-15T14:51:27+01:00"
+      },
+      {
+        "id": "a05b5399-9629-4d4f-9e61-72abb162032b",
+        "wallet_id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+        "wallet": {
+          "id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+          "name": "XRP",
+          "symbol": "XRP",
+          "image": "http://csc.test/default/wallets/XRP.png",
+          "is_fiat": false
+        },
+        "amount": 1000,
+        "status": "completed",
+        "color": "green",
+        "type": "credit",
+        "description": null,
+        "company": "Sullivan and Michael Inc",
+        "created_at": "2025-11-14T18:24:10+01:00"
+      }
+    ],
+    "stats": {
+      "success": {
+        "count": 2,
+        "total": 2000
+      },
+      "pending": {
+        "count": 1,
+        "total": 10300
+      },
+      "failed": {
+        "count": 0,
+        "total": 0
+      }
+    },
+    "graph": [
+      {
+        "date": "2025-11-04",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-05",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-06",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-07",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-08",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-09",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-10",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-11",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-12",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-13",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-14",
+        "success": 1000,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-15",
+        "success": 1000,
+        "pending": 10300,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-16",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      {
+        "date": "2025-11-17",
+        "success": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    ],
+    "totals": {
+      "received": 2000,
+      "pending": 10300,
+      "failed": 0,
+      "net": 2000,
+      "volume": 12300,
+      "count": 3,
+      "average": 4100,
+      "success_rate": 66.67,
+      "period": {
+        "from": "2025-11-14T18:24:10+01:00",
+        "to": "2025-11-15T14:51:57+01:00"
+      }
+    }
+  }
+}

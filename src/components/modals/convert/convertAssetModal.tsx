@@ -16,6 +16,8 @@ import { useAuthStore } from "@/lib/store/auth";
 import { cn } from "@/lib/utils";
 import { useSubmitConversionRequest } from "@/lib/api/conversion";
 import { useToast } from "@/components/providers/toast-provider";
+import { useSiteTitle } from "@/hooks/use-site-title";
+import { formatUserCurrency } from "@/lib/currency";
 
 interface ConvertAssetModalProps {
   asset: {
@@ -42,6 +44,7 @@ const parseNumeric = (value?: number | string) => {
 const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
   const { user } = useAuthStore();
   const { showToast } = useToast();
+  const siteTitle = useSiteTitle();
   const fiatOptions = React.useMemo(() => user?.currencies ?? [], [user?.currencies]);
   const [selectedCurrency, setSelectedCurrency] = useState<string | undefined>(
     fiatOptions[0]?.id
@@ -133,18 +136,15 @@ const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
     >
       <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
         {/* Transaction Column */}
-        <section className="order-1 lg:order-2 lg:col-span-5 space-y-5 rounded-2xl border border-gray-100 bg-white/80 p-6 shadow-md shadow-gray-200/50 dark:border-white/10 dark:bg-gray-900">
-          <div className="rounded-2xl border border-gray-100 bg-gray-50/60 p-5 shadow-inner shadow-gray-200 dark:border-white/10 dark:bg-gray-900/40 dark:shadow-black/20">
-            <div className="mb-3 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.25em] text-gray-400">
+        <section className="order-1 lg:order-2 lg:col-span-5 space-y-5 rounded-xl border border-gray-100 bg-white/80 p-6 shadow-sm dark:border-white/10 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 shadow-sm dark:border-white/10 dark:bg-gray-900/40">
+            <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-gray-400">
               <span>Amount To Convert</span>
-              <span className="text-indigo-500">
-                Balance: {startingBalance.toLocaleString()} {asset.symbol}
-              </span>
             </div>
             <Input
               readOnly
-              value={`$ ${startingBalance.toLocaleString()}`}
-              className="h-12 rounded-2xl border-none bg-white text-2xl font-semibold text-gray-900 shadow-inner shadow-gray-200 focus-visible:ring-0 dark:bg-gray-900 dark:text-white"
+              value={formatUserCurrency(startingBalance, user).displayValue}
+              className="h-12 rounded-xl border-none bg-white text-2xl font-semibold text-gray-900 focus-visible:ring-0 dark:bg-gray-900 dark:text-white"
             />
           </div>
 
@@ -155,7 +155,7 @@ const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-gray-100 bg-white/70 p-5 shadow-sm shadow-indigo-100 dark:border-white/10 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-100 bg-white/70 p-4 shadow-sm dark:border-white/10 dark:bg-gray-900">
             <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
               Destination Currency
             </label>
@@ -176,12 +176,7 @@ const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
                       value={currency.id}
                       className="rounded-lg px-3 py-2 text-sm font-medium"
                     >
-                      <div className="flex w-full items-center justify-between">
-                        <span>{currency.name}</span>
-                        <span className="text-xs uppercase text-gray-400">
-                          {currency.symbol}
-                        </span>
-                      </div>
+                      {currency.name}
                     </SelectItem>
                   ))}
               </SelectContent>
@@ -212,18 +207,17 @@ const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
 
         {/* Content Column */}
         <section className="order-2 lg:order-1 lg:col-span-7 space-y-5">
-          <div className="rounded-2xl border border-indigo-100/80 bg-indigo-50/60 p-5 text-sm leading-relaxed text-gray-700 shadow-sm dark:border-indigo-400/20 dark:bg-indigo-950/20 dark:text-gray-200">
+          <div className="rounded-xl border border-indigo-100/80 bg-indigo-50/60 p-4 text-sm leading-relaxed text-gray-700 shadow-sm dark:border-indigo-400/20 dark:bg-indigo-950/20 dark:text-gray-200">
             <p>
               <span className="font-semibold text-indigo-600 dark:text-indigo-300">
                 Convert
               </span>{" "}
-              your assets into fiat currency with CSC Escrow & Settlement UK
-              Ltd. Regulated agents desk the order and settle at the best rate
+              your assets into fiat currency with {siteTitle}. Regulated agents desk the order and settle at the best rate
               available.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-gray-100/80 bg-white/80 p-5 shadow-sm dark:border-white/10 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-100/80 bg-white/80 p-4 shadow-sm dark:border-white/10 dark:bg-gray-900">
             <button
               type="button"
               className="flex w-full items-center justify-between gap-3 text-left"
@@ -247,7 +241,7 @@ const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
               <div className="mt-3 space-y-3 text-sm text-gray-600 dark:text-gray-300">
                 <p>
                   Convert into fiat the gold, silver, and other assets held by
-                  CSC Escrow & Settlement UK Ltd. An escrow agent sources the
+                  {siteTitle}. An escrow agent sources the
                   best market price while adhering to strict regulatory
                   requirements.
                 </p>
@@ -260,7 +254,7 @@ const ConvertAssetModal = ({ asset, trigger }: ConvertAssetModalProps) => {
             )}
           </div>
 
-          <div className="rounded-2xl border border-red-200/70 bg-red-50/80 p-5 text-center text-sm text-red-700 shadow-sm dark:border-red-500/40 dark:bg-red-500/10 dark:text-red-200">
+          <div className="rounded-xl border border-blue-200/70 bg-blue-50/80 p-4 text-center text-sm text-blue-700 shadow-sm dark:border-blue-500/40 dark:bg-blue-500/10 dark:text-blue-200">
             <div className="mb-2 flex items-center justify-center gap-2 text-base font-bold">
               <ShieldCheck className="size-5" />
               PAYMENT SERVICES STATUS

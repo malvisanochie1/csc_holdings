@@ -4,31 +4,84 @@ import { FaArrowDownLong } from "react-icons/fa6";
 import FinancialAssetsMobile from "./financialAssetsMobile";
 import AssetCard from "./assetCard";
 import { useAuthStore } from "@/lib/store/auth";
+import { useAssetStore } from "@/lib/store/assets";
+import { useAssetWebsocket } from "@/hooks/use-asset-websocket";
+import { computeAssetRealtimeMetrics } from "@/lib/assets";
+
+export type DashboardAssetCard = {
+  id?: string;
+  img: string;
+  currency: string;
+  option: string;
+  amount: number;
+  walletId?: string;
+  userWalletId?: string;
+  changePercent?: number;
+};
 
 const FinancialAssets = () => {
   const { user } = useAuthStore();
+  const wallets = useAssetStore((state) => state.wallets);
+  useAssetWebsocket();
 
   // Get user's assets (crypto/precious metals) and currencies (fiat)
-  const userAssets = user?.assets || [];
-  const userCurrencies = user?.currencies || [];
+  const userAssets = React.useMemo(() => user?.assets ?? [], [user?.assets]);
+  const userCurrencies = React.useMemo(
+    () => user?.currencies ?? [],
+    [user?.currencies]
+  );
+
+  const assetCards: DashboardAssetCard[] = React.useMemo(() => {
+    const defaultImage = "/dashboard/asset.gif";
+    return userAssets.map((asset) => {
+      const metrics = computeAssetRealtimeMetrics(asset, wallets);
+      const changePercent =
+        typeof metrics.wallet?.changePercent24h === "number"
+          ? metrics.wallet.changePercent24h
+          : undefined;
+
+      const assetId = (asset as { id?: string })?.id;
+      const assetImage: string =
+        (asset as { image?: string })?.image ?? defaultImage;
+      const assetName: string =
+        (asset as { name?: string })?.name ||
+        (asset as { symbol?: string })?.symbol ||
+        "Asset";
+      const assetOption: string =
+        (asset as { sym?: string })?.sym ||
+        (asset as { symbol?: string })?.symbol ||
+        assetName;
+
+      return {
+        id: assetId ?? assetName,
+        img: assetImage,
+        currency: assetName,
+        option: assetOption,
+        walletId: (asset as { id?: string })?.id,
+        userWalletId: (asset as { user_wallet_id?: string })?.user_wallet_id,
+        amount: metrics.realtimeValue,
+        changePercent,
+      };
+    });
+  }, [userAssets, wallets]);
 
   return (
     <>
       <div className="sm:flex flex-col hidden">
         {/* Crypto Assets */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-          {userAssets.map((asset) => (
+          {assetCards.map((asset) => (
             <AssetCard
               key={asset.id}
-              img={asset.image}
-              currency={asset.name}
-              amount={asset.balance}
-              option={asset.symbol}
+              img={asset.img}
+              currency={asset.currency}
+              amount={asset.amount}
+              option={asset.option}
               actionType="convert"
-              walletId={asset.id}
-              userWalletId={asset.user_wallet_id}
-              percentageChange={0} // API doesn't provide this, could be calculated
-              showPercentage={true}
+              walletId={asset.walletId}
+              userWalletId={asset.userWalletId}
+              percentageChange={asset.changePercent}
+              showPercentage={typeof asset.changePercent === "number"}
               className="" // Default styling
             />
           ))}
@@ -65,7 +118,7 @@ const FinancialAssets = () => {
           ))}
         </div>
       </div>
-      <FinancialAssetsMobile />
+      <FinancialAssetsMobile assets={assetCards} currencies={userCurrencies} />
     </>
   );
 };

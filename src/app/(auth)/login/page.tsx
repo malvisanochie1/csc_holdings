@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { useLogin } from "@/lib/api/auth";
 import type { ApiErrors } from "@/lib/types/api";
 import { Eye, EyeOff, Shield, Mail, Lock, CheckCircle2 } from "lucide-react";
+import { useSiteTitle } from "@/hooks/use-site-title";
 
 type FormState = {
   email: string;
@@ -30,6 +31,8 @@ const LoginPage = () => {
   const [form, setForm] = React.useState<FormState>(initialForm);
   const [status, setStatus] = React.useState<StatusState>(null);
   const [showPassword, setShowPassword] = React.useState(false);
+  const siteTitle = useSiteTitle();
+  const headlineTitle = React.useMemo(() => siteTitle.toUpperCase(), [siteTitle]);
 
   const requestError = login.error as (Error & { errors?: ApiErrors }) | null;
 
@@ -72,7 +75,7 @@ const LoginPage = () => {
             <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
               Welcome Back
             </h1>
-            <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm">CSC ESCROW & SETTLEMENT UK</p>
+            <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm">{headlineTitle}</p>
             <p className="text-gray-600 dark:text-gray-300 text-xs mt-1">
               Sign in to access your secure account
             </p>

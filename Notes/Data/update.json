@@ -1,0 +1,228 @@
+{
+  "status": "success",
+  "message": "Account updated",
+  "data": {
+    "id": "a05b5345-30a3-479e-8ec7-2318fcdf0e15",
+    "account_id": null,
+    "first_name": "Benjamin",
+    "last_name": "Chukwudi",
+    "email": "tests@app.com",
+    "phone": "+2348131652853",
+    "country_code": "NG",
+    "country": "Nigeria",
+    "username": "benny.holdings",
+    "address": "21 Adeola Odeku St",
+    "city": "Lagos",
+    "state": "Lagos",
+    "postal_code": "100271",
+    "timezone": "Africa/Lagos",
+    "occupation": "Compliance Analyst",
+    "identity_number": "A045-8821-9088",
+    "language_preference": "en",
+    "avatar": "http://csc.test/default/avatar.png",
+    "status": "pending",
+    "birth_date": null,
+    "total_deposit": 0,
+    "autotrader": false,
+    "autotrader_status": null,
+    "can_open_trade": true,
+    "can_close_trade": true,
+    "verification_status": "pending",
+    "notification_msg": "Please verify your account.",
+    "currency": {
+      "id": 2,
+      "name": "Euro",
+      "symbol": "€",
+      "code": "EUR",
+      "rate": 0.86,
+      "icon": null
+    },
+    "notifications": [],
+    "currencies": [
+      {
+        "id": "a05b5306-544d-4f8d-960f-d7eb3fb21b94",
+        "user_wallet_id": "a05b5345-34d9-4284-b441-65854d8e6d7e",
+        "name": "US Dollar",
+        "symbol": "$",
+        "image": "http://csc.test/default/wallets/dollar-symbol.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 1,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-546b-46a2-9e37-a9ee386f524e",
+        "user_wallet_id": "a05b5345-3509-4d26-ab75-a7215e4950b4",
+        "name": "Euro",
+        "symbol": "€",
+        "image": "http://csc.test/default/wallets/euro.png",
+        "balance": 1000,
+        "balance_val": "1,000.0000",
+        "is_fiat": 1,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-5487-49c8-b71f-10400a4c118e",
+        "user_wallet_id": "a05b5345-352c-4641-857c-b2d3e1da32b5",
+        "name": "British Pound",
+        "symbol": "£",
+        "image": "http://csc.test/default/wallets/pound-sterling.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 1,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-54b6-4027-8bd3-1ab9228b1012",
+        "user_wallet_id": "a05b5345-354e-412c-9e8c-0e7257f26f0c",
+        "name": "Japanese Yen",
+        "symbol": "¥",
+        "image": "http://csc.test/default/wallets/yen.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 1,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-54e2-492a-9941-686ed258a468",
+        "user_wallet_id": "a05b5345-356d-4ad9-a54d-3013976b0e13",
+        "name": "Dirham",
+        "symbol": "AED",
+        "image": "http://csc.test/default/wallets/dirham.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 1,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      }
+    ],
+    "assets": [
+      {
+        "id": "a05b5306-5214-405f-a126-4a593aa392d0",
+        "user_wallet_id": "a05b5345-3321-4e77-9134-74e50066421c",
+        "name": "Gold",
+        "symbol": "Au",
+        "image": "http://csc.test/default/wallets/gold.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-53d3-48c4-95d7-19c6f014ba52",
+        "user_wallet_id": "a05b5345-341e-4aa0-b048-588f86af6d07",
+        "name": "Solana",
+        "symbol": "◎",
+        "image": "http://csc.test/default/wallets/solana.png",
+        "balance": 1000,
+        "balance_val": "1,000.0000",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+        "user_wallet_id": "a05b5345-344c-4815-b573-d2bc7b8beef0",
+        "name": "XRP",
+        "symbol": "✕",
+        "image": "http://csc.test/default/wallets/XRP.png",
+        "balance": 1000,
+        "balance_val": "1,000.0000",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-5412-475c-a9cf-ad1f9ac231db",
+        "user_wallet_id": "a05b5345-3483-4fb8-9dc6-aa04c3adc3e8",
+        "name": "Ethereum",
+        "symbol": "Ξ",
+        "image": "http://csc.test/default/wallets/Etherum.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      },
+      {
+        "id": "a05b5306-542d-400a-9b08-57161b8efd66",
+        "user_wallet_id": "a05b5345-34ab-421e-8609-739e9e21d079",
+        "name": "Bitcoin",
+        "symbol": "₿",
+        "image": "http://csc.test/default/wallets/btc.png",
+        "balance": 0,
+        "balance_val": "0.0000",
+        "is_fiat": 0,
+        "conversion_rate": {
+          "min": "0.00",
+          "max": "0.00"
+        },
+        "status": "active"
+      }
+    ],
+    "on_going_transactions": [],
+    "on_going_conversion_requests": [
+      {
+        "id": "a05cda8a-ea6e-44ff-8e7e-baf1065560ff",
+        "user_id": "a05b5345-30a3-479e-8ec7-2318fcdf0e15",
+        "from_wallet_id": "a05b5306-53f6-4136-bf9c-97410ee36e19",
+        "to_wallet_id": "a05b5306-5487-49c8-b71f-10400a4c118e",
+        "status": "processing",
+        "step": 3,
+        "amount": 1000,
+        "converted_amount": 0,
+        "paid_amount": 100,
+        "percent": 0,
+        "transfer_method": "Crypto Transfer",
+        "paid": true,
+        "data": [],
+        "message": "Your conversion request is under going evaluation and will complete execution once the conversion fee is verified by the compliance department Thanks"
+      }
+    ],
+    "on_going_withdrawal_request": null,
+    "conversion_period": null,
+    "total_fiat": 1000,
+    "total_fiat_val": 1000,
+    "total_asset": 2000,
+    "total_asset_val": 2000,
+    "payment_wallet": {
+      "name": "BTC",
+      "wallet": "TKfQ2NPDquDQQy6GHFrpbM9bMDGwcm8bnp",
+      "image": "https://queekapp-files.s3.us-east-1.amazonaws.com/qrcodes/f9d6ec54-7a62-4221-9674-93a3f93a4a6f.png",
+      "message": "Only send BTC to this wallet address. Sending any other coin or token may result in the loss of your deposit."
+    },
+    "charges": []
+  }
+}

@@ -1,4 +1,5 @@
-import type { WithdrawalStage } from "@/lib/types/api";
+import type { WithdrawalStage, UserResource } from "@/lib/types/api";
+import { formatUserCurrency } from "@/lib/currency";
 
 export type WithdrawalMethodKey = "crypto" | "bank";
 
@@ -10,7 +11,7 @@ export type WithdrawalMethodDescriptor = {
 export const withdrawalMethodTabs: WithdrawalMethodDescriptor[] = [
   {
     key: "crypto",
-    title: "Bitcoin Transfer",
+    title: "Crypto Transfer",
   },
   {
     key: "bank",
@@ -127,12 +128,12 @@ const STAGE_BASE_COPY: Record<WithdrawalStage, WithdrawalStageCopy> = {
 
 export function getWithdrawalStageCopy(
   stage: WithdrawalStage,
-  opts: { amount?: number; percent?: number; showPercent?: boolean; message?: string | null } = {}
+  opts: { amount?: number; percent?: number; showPercent?: boolean; message?: string | null; user?: Pick<UserResource, "currency"> | null } = {}
 ): WithdrawalStageCopy {
   const base = STAGE_BASE_COPY[stage];
   const amountLabel =
     typeof opts.amount === "number"
-      ? Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(opts.amount)
+      ? formatUserCurrency(opts.amount, opts.user).displayValue
       : null;
   const percentLabel =
     typeof opts.percent === "number" && opts.showPercent !== false

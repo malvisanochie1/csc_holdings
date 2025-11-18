@@ -10,7 +10,7 @@ export interface InsufficientBalanceOptions {
 
 export function showInsufficientBalanceAlert(options?: InsufficientBalanceOptions) {
   const title = options?.title ?? "Insufficient Balance";
-  const description = options?.description ?? "Wait for incoming reclaims to begin conversion.";
+  const description = options?.description ?? "";
 
   return Swal.fire({
     title,

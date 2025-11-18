@@ -5,8 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
-import { NavKey, navItems } from "../../text/csc";
+import { NavKey, mobileNavItems, desktopNavItems } from "../../text/csc";
 import { useLogout } from "@/lib/api/auth";
+import { useSiteTitle } from "@/hooks/use-site-title";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -14,6 +15,8 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const menuRef = React.useRef<HTMLDivElement | null>(null);
   const { mutate: triggerLogout, isPending: isLoggingOut } = useLogout();
+  const siteTitle = useSiteTitle();
+  const uppercaseSiteTitle = React.useMemo(() => siteTitle.toUpperCase(), [siteTitle]);
 
   React.useEffect(() => {
     setOpen(false);
@@ -30,13 +33,18 @@ export default function Navbar() {
   }, [open]);
 
   const inferredActive: NavKey = React.useMemo(() => {
-    if (!pathname) return "notifications";
-    if (pathname.startsWith("/dashboard/transactions")) return "transactions";
+    if (!pathname) return "dashboard";
+    if (pathname.startsWith("/dashboard/transactions") || pathname.startsWith("/dashboard/transaction")) {
+      return "transactions";
+    }
     if (pathname.startsWith("/dashboard")) return "dashboard";
     if (pathname.startsWith("/profile")) return "profile";
-    if (pathname.startsWith("/notification")) return "notifications";
+    if (pathname.startsWith("/verification")) return "verification";
+    if (pathname.startsWith("/notifications")) return "notifications";
+    if (pathname.startsWith("/livechat")) return "livechat";
+    if (pathname.startsWith("/settings")) return "settings";
     if (pathname.startsWith("/logout")) return "logout";
-    return "notifications";
+    return "dashboard";
   }, [pathname]);
 
   const handleLogout = React.useCallback(() => {
@@ -48,7 +56,7 @@ export default function Navbar() {
   }, [router, triggerLogout]);
 
   const renderNavLinks = (isMobile = false) =>
-    navItems.map((item) => {
+    desktopNavItems.map((item) => {
       const isLogoutItem = item.key === "logout";
       const isActive = !isLogoutItem && item.key === inferredActive;
       const label = isLogoutItem && isLoggingOut ? "Logging out..." : item.label;
@@ -106,13 +114,13 @@ export default function Navbar() {
                 <div className="flex items-center gap-3">
                   <Image
                     src="/logo.png"
-                    alt="CSC logo"
+                    alt={`${siteTitle} logo`}
                     width={100}
                     height={100}
                     className="w-10 md:w-20 h-10 md:h-20 object-contain"
                   />
                   <div className="hidden sm:block text-sm font-semibold">
-                    CSC ESCROW &amp; SETTLEMENT UK LTD
+                    {uppercaseSiteTitle}
                   </div>
                 </div>
               </Link>
@@ -154,18 +162,18 @@ export default function Navbar() {
           paddingBottom: "env(safe-area-inset-bottom)",
         }}
       >
-        <ul className="flex items-center justify-around px-3 py-3">
-          {navItems.slice(0, 5).map((item) => {
+        <ul className="flex items-center justify-around px-2 py-2">
+          {mobileNavItems.map((item) => {
             const isActive = item.key === inferredActive;
             return (
               <li key={item.key} className="flex-1">
-                <Link href={item.href} className="flex flex-col items-center gap-1.5 py-1">
-                  <div className={`flex items-center justify-center w-14 h-12 rounded-2xl transition-all duration-300 ${
+                <Link href={item.href} className="flex flex-col items-center gap-0.5 py-0.5">
+                  <div className={`flex items-center justify-center w-10 h-8 rounded-lg transition-all duration-300 ${
                     isActive
-                      ? "bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg shadow-blue-500/30 scale-105"
+                      ? "bg-gradient-to-r from-emerald-500 to-green-600 shadow-lg shadow-emerald-500/30 scale-105"
                       : "bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800"
                   }`}>
-                    <span className={`text-2xl ${
+                    <span className={`${
                       isActive
                         ? "text-white"
                         : "text-gray-500 dark:text-gray-400"
@@ -173,9 +181,9 @@ export default function Navbar() {
                       {item.icon}
                     </span>
                   </div>
-                  <span className={`text-[11px] font-medium transition-colors ${
+                  <span className={`text-[9px] font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600 dark:text-blue-400"
+                      ? "text-emerald-600 dark:text-emerald-400"
                       : "text-gray-500 dark:text-gray-400"
                   }`}>
                     {item.label}

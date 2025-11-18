@@ -4,8 +4,28 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { useAuthStore } from "@/lib/store/auth";
 import type { ApiErrors, ApiResponse } from "@/lib/types/api";
 
-const base = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-const baseURL = `${base}`;
+const FALLBACK_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
+function resolveBaseURL() {
+  if (typeof window === "undefined") {
+    return FALLBACK_BASE;
+  }
+
+  const hostname = window.location.hostname.toLowerCase();
+  const isLocalhost =
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    hostname === "0.0.0.0" ||
+    hostname.endsWith(".local");
+
+  if (isLocalhost) {
+    return FALLBACK_BASE;
+  }
+
+  return window.location.origin+'/api/v1';
+}
+
+const baseURL = resolveBaseURL();
 
 export const api: AxiosInstance = axios.create({
   baseURL,
